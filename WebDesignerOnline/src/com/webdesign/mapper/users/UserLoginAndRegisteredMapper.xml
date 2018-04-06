@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件中编写sql语句 -->
+<!-- xml 可以作为配置文件。 -->
+<mapper namespace="com.webdesign.mapper.users.UserLoginAndRegisteredMapper">
+    <!--查询分页用户  -->
+    <select id="selectTest" resultType="com.webdesign.bean.users.Provinces" resultMap="provinces" >
+        SELECT * FROM  USER
+    </select>
+
+</mapper>
