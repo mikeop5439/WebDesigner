@@ -1,7 +1,7 @@
 package com.webdesign.service.users.serviceimpl;
 
-import com.webdesign.bean.users.Provinces;
 import com.webdesign.bean.users.User;
+import com.webdesign.bean.users.extend.UsersRegisteredClass;
 import com.webdesign.mapper.users.UserLoginAndRegisteredMapper;
 import com.webdesign.service.users.service.UserLoginAndRegisteredService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,32 @@ public class UserLoginAndRegisteredServiceImp implements UserLoginAndRegisteredS
     private UserLoginAndRegisteredMapper userLoginAndRegistered;
 
     @Override
-    public List<Provinces> selectTest() {
-        return userLoginAndRegistered.selectTest();
+    public void usersRegistered(UsersRegisteredClass usersRegisteredClass) {
+        userLoginAndRegistered.usersRegistered(usersRegisteredClass);
+    }
+
+    @Override
+    public int countUsername(String user_name) {
+        return userLoginAndRegistered.countUsername(user_name);
+    }
+
+    @Override
+    public int queryUserLogin(User user) {
+        return userLoginAndRegistered.queryUserLogin(user);
+    }
+
+    @Override
+    public void setManager(int user_id) {
+        userLoginAndRegistered.setManager(user_id);
+    }
+
+    @Override
+    public void nosetManager(int user_id) {
+        userLoginAndRegistered.nosetManager(user_id);
+    }
+
+    @Override
+    public List<User> queryUserByName(String user_name) {
+        return userLoginAndRegistered.queryUserByName(user_name);
     }
 }

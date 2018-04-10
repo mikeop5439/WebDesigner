@@ -17,6 +17,11 @@ public class AddTest {
     private UserLoginAndRegisteredService userLoginAndRegisteredService;
     @Test
     public void test1(){
-        System.out.print(userLoginAndRegisteredService.selectTest());
+        String userCode="1233";
+        String verificationCode="1233";
+
+            System.out.println(userCode.equals(verificationCode));
+
     }
+
 }

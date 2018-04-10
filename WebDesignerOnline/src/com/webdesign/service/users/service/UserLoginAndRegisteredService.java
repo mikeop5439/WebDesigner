@@ -1,7 +1,7 @@
 package com.webdesign.service.users.service;
 
-import com.webdesign.bean.users.Provinces;
 import com.webdesign.bean.users.User;
+import com.webdesign.bean.users.extend.UsersRegisteredClass;
 
 import java.util.List;
 
@@ -10,6 +10,16 @@ import java.util.List;
  */
 
 public interface UserLoginAndRegisteredService {
-     public List<Provinces> selectTest();
+     //注册用户
+     public void usersRegistered(UsersRegisteredClass usersRegisteredClass);
+     //验证用户名是否重复
+     public int countUsername(String user_name);
+     //用户登录
+     public int queryUserLogin(User user);
+     //修改用户权限
+     public void setManager(int user_id);
+     public void nosetManager(int user_id);
+     //查询用户
+     public List<User> queryUserByName(String user_name);
 
 }

@@ -5,9 +5,31 @@
 <!-- 这个文件中编写sql语句 -->
 <!-- xml 可以作为配置文件。 -->
 <mapper namespace="com.webdesign.mapper.users.UserLoginAndRegisteredMapper">
-    <!--查询分页用户  -->
-    <select id="selectTest" resultType="com.webdesign.bean.users.Provinces" resultMap="provinces" >
-        SELECT * FROM  USER
+    <!--注册用户  -->
+    <insert id="usersRegistered" parameterType="usersregisteredclass" >
+        insert into
+        user(user_name,user_password,user_tele,user_register)
+        values (#{user_name},#{user_password},#{user_tele},#{user_register})
+    </insert>
+    <!--验证用户名是否重复  -->
+    <select id="countUsername" parameterType="string" resultType="int" >
+		select count(*) from user u
+		where user_name = #{user_name}
+	</select>
+    <!--用户登录-->
+    <select id="queryUserLogin" parameterType="user" resultType="int" >
+		select count(*) from user u
+		where user_name = #{user_name} and user_password= #{user_password}
+	</select>
+    <!--修改用户权限-->
+    <update id="setManager" parameterType="int" >
+        update user u set  u.user_flage=1 where u.user_id=#{user_id}
+    </update>
+    <update id="nosetManager" parameterType="int" >
+        update user u set  u.user_flage=0 where u.user_id=#{user_id}
+    </update>
+    <!--查询用户-->
+    <select id="queryUserByName" parameterType="String" resultType="user">
+        select * from user u where u.user_name=#{user_name}
     </select>
-
 </mapper>
