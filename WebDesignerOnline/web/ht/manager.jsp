@@ -20,7 +20,78 @@
 <script src="${pageContext.request.contextPath}/ht/js/html5shiv.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript">
+	function seachuser() {
+        var user_name=$("#seachinput").val();
+        $.ajax({
+            type:"POST",
+            url:"${pageContext.request.contextPath }/users/queryUserByName.action",
+            data:"user_name="+user_name,
+            dataType:"json",
+            success:function(data){
+                $("#tableinsert").empty();
+                $.each(data,function(index,content){
+                    $("#user_id").val(content.user_id);
+                    $("#user_falge").val(content.user_flage);
+                    var date = "/Date("+content.user_register+")/";
+                    var tr=$("<tr></tr>");
+                    var flag_txt;
+                    if(content.user_flage==0){
+                        flag_txt="普通用户"
+                        var button=$("<button></button>").attr("id","fat-btn").attr("data-loading-text","loading...").addClass("btn btn-primary btn-sm").attr("data-toggle","modal").attr("data-target","#myModal").append("任命");
 
+                    }else if(content.user_flage==1){
+                        flag_txt="资源管理员"
+                        var button=$("<button></button>").attr("id","fat-btn").attr("data-loading-text","loading...").addClass("btn btn-primary btn-sm").attr("data-toggle","modal").attr("data-target","#myModal").append("卸任");
+
+                    }else if(content.user_flage==2){
+                        flag_txt="站长"
+                    }
+                    var td1=$("<td></td>").append(content.user_name);
+                    var td2=$("<td></td>").append(getDateTime(ConvertJSONDateToJSDate(date)));
+                    var td3=$("<td></td>").attr("id","flage").append(flag_txt);
+                    var td4=$("<td></td>").append(button);
+                    tr.append(td1).append(td2).append(td3).append(td4);
+                    $("#tableinsert").append(tr)
+                });
+            }
+        });
+    }
+    function setManager() {
+        var user_id=$("#user_id").val();
+        if($("#user_falge").val()==0){
+            console.log("任命");
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath }/users/setManager.action",
+                data:"user_id="+user_id,
+                dataType:"json",
+                success:function(data){
+                    $("#flage").empty();
+                    $("#flage").append("资源管理员");
+                    $("#fat-btn").empty();
+                    $("#fat-btn").append("卸任");
+                    $("#user_falge").val(1);
+                }
+            });
+		}else{
+            console.log("卸任");
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath }/users/nosetManager.action",
+                data:"user_id="+user_id,
+                dataType:"json",
+                success:function(data){
+                    $("#flage").empty();
+                    $("#flage").append("普通用户");
+                    $("#fat-btn").empty();
+                    $("#fat-btn").append("任命");
+                    $("#user_falge").val(0);
+                }
+            });
+		}
+    }
+</script>
 </head>
 
 <body>
@@ -36,10 +107,10 @@
 				<a class="navbar-brand" href="#"><span>米拉</span>后台管理系统</a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${sessionScope.username} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							
-							<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+							<li><a href="${pageContext.request.contextPath }/users/quitUser.action"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -122,12 +193,15 @@
 						        <th data-field="price" data-sortable="true">操作</th>
 						    </tr>
 						    </thead>
-						    <tr>
-						    	<td>zy</td>
-						    	<td>ay</td>
-						    	<td>ax</td>
-						    	<td><button id="fat-btn" data-loading-text="loading..."  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">删除</button></td>
-						    </tr>
+						    <tbody id="tableinsert">
+							<tr >
+								<td colspan="2">No matching records found</td>
+								<<%--td>zy</td>
+								<td>ay</td>
+								<td>ax</td>
+								<td><button id="fat-btn" data-loading-text="loading..."  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">删除</button></td>--%>
+							</tr>
+							</tbody>
 						</table>
 					</div>
 				</div>
@@ -148,6 +222,8 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
+				<input type="hidden" id="user_id">
+				<input type="hidden" id="user_falge">
 				<h4  id="myModalLabel" style="text-align: center;">
 					你确认删除吗？
 				</h4>
@@ -157,7 +233,7 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">
 				关闭
 				</button>
-				<button type="button" class="btn btn-primary">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="setManager()">
 					确认
 				</button>
 			</div>
@@ -174,6 +250,8 @@
 	<script src="${pageContext.request.contextPath}/ht/js/easypiechart-data.js"></script>
 	<script src="${pageContext.request.contextPath}/ht/js/bootstrap-datepicker.js"></script>
 	<script src="${pageContext.request.contextPath}/ht/js/bootstrap-table.js"></script>
+	<script src="${pageContext.request.contextPath}/ht/js/ConvertDate.js"></script>
+
 	<script>
 		!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  

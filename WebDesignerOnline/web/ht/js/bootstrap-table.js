@@ -166,7 +166,7 @@
             return 'Search';
         },
         formatNoMatches: function () {
-            return 'No matching records found';
+
         },
         formatRefresh: function () {
             return 'Refresh';
@@ -508,7 +508,7 @@
         html = ['<div class="columns btn-group pull-right">'];
 
         if (this.options.showRefresh) {
-            html.push(sprintf('<button class="btn btn-default" type="button" name="refresh" title="%s">',
+            html.push(sprintf('<button class="btn btn-default" type="button" name="refresh" title="%s" onclick="seachuser()">',
                 this.options.formatRefresh()),
                 '<i class="glyphicon glyphicon-refresh icon-refresh"></i>',
                 '</button>');
@@ -590,7 +590,7 @@
             html = [];
             html.push(
                 '<div class="pull-right search">',
-                    sprintf('<input class="form-control" type="text" placeholder="%s">',
+                    sprintf('<input id="seachinput" class="form-control" type="text" placeholder="%s">',
                         this.options.formatSearch()),
                 '</div>');
 

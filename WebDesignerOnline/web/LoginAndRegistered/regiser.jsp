@@ -19,6 +19,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/LoginAndRegistered/css/component.css" />
 <!--[if IE]>
 <script src="${pageContext.request.contextPath}/LoginAndRegistered/js/html5.js"></script>
+
+
 <![endif]-->
 <style type="text/css">
 a:link {color: #FF0000}
@@ -98,6 +100,7 @@ a:active {color: #0000FF}
 		<script src="${pageContext.request.contextPath}/LoginAndRegistered/js/EasePack.min.js"></script>
 		<script src="${pageContext.request.contextPath}/LoginAndRegistered/js/rAF.js"></script>
 		<script src="${pageContext.request.contextPath}/LoginAndRegistered/js/demo-1.js"></script>
+		<script src="${pageContext.request.contextPath}/ht/js/jquery-1.11.1.min.js"></script>
 		
 		
 		<script type="text/javascript"> 
@@ -110,26 +113,41 @@ a:active {color: #0000FF}
         return nametip && nametel && passtip && repasstip ; 
   } 
   //验证用户名   
-  function checkUserName(){ 
-  var username = document.getElementById('userName'); 
-  var errname = document.getElementById('nameErr'); 
-  var pattern = /^\w{4,8}$/;  //用户名格式正则表达式：用户名要至少三位 
-  if(username.value.length == 0){ 
-    errname.innerHTML="用户名不能为空"
-    errname.className="error"
-    return false; 
-    } 
-  if(!pattern.test(username.value)){ 
-    errname.innerHTML="用户长度至少为4，最多为8"
-    errname.className="error"
-    return false; 
-    } 
-   else{ 
-     errname.innerHTML=""
-     errname.className="success"; 
-     return true; 
-     } 
-  } 
+        //验证用户名
+        function checkUserName(){
+            var username = document.getElementById('userName');
+            var errname = document.getElementById('nameErr');
+            var pattern = /^[^@#]{4,16}$/;
+            var user_name=$("#userName").val();
+            var flag;
+            if(!pattern.test(username.value)){
+                errname.innerHTML="用户名为4~16个字符，且不能包含”@”和”#”字符";
+                errname.className="error";
+                return false;
+            }
+            else{
+                errname.innerHTML="";
+                errname.className="success";
+                $.ajax({
+                    type:"POST",
+                    url:"${pageContext.request.contextPath }/users/checkUsername.action",
+                    data:"user_name="+user_name,
+                    dataType:"json",
+                    success:function(data){
+                        if(data == 0){
+                            errname.innerHTML="用户名可用";
+                            errname.className="success";
+                            flag=true;
+                        }else{
+                            errname.innerHTML="用户名重复";
+                            errname.className="error";
+                            flag=false;
+                        }
+                    }
+                });
+                return flag;
+            }
+        }
  //验证电话  
   function checkUserPhone(){ 
   var username = document.getElementById('userPhone'); 
