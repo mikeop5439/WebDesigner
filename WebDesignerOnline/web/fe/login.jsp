@@ -11,14 +11,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <title>login</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/LoginAndRegistered/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/LoginAndRegistered/css/amazeui.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fe/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fe/css/amazeui.min.css">
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/LoginAndRegistered//css/demo.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fe//css/demo.css" />
 <!--必要样式-->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/LoginAndRegistered/css/component.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fe/css/component.css" />
 <!--[if IE]>
-<script src="${pageContext.request.contextPath}/LoginAndRegistered/js/html5.js"></script>
+<script src="${pageContext.request.contextPath}/fe/js/html5.js"></script>
 <![endif]-->
 <style type="text/css">
 
@@ -36,7 +36,7 @@ a:active {color: #0000FF}
                  
 					<canvas id="demo-canvas"></canvas>
 					<div class="logo_box">
-						<img src="images/logo.png">
+						<img src="../fe/images/logo.png">
 					
 						<form action="${pageContext.request.contextPath }/users/queryuserLogin.action" name="f" method="post" onSubmit="return checkForm()">
 							<div id="change_margin_1" class="input_outer">
@@ -76,10 +76,10 @@ a:active {color: #0000FF}
 		<!-- /container -->
 		
 		
-		<script src="${pageContext.request.contextPath}/LoginAndRegistered/js/TweenLite.min.js"></script>
-		<script src="${pageContext.request.contextPath}/LoginAndRegistered/js/EasePack.min.js"></script>
-		<script src="${pageContext.request.contextPath}/LoginAndRegistered/js/rAF.js"></script>
-		<script src="${pageContext.request.contextPath}/LoginAndRegistered/js/demo-1.js"></script>
+		<script src="${pageContext.request.contextPath}/fe/js/TweenLite.min.js"></script>
+		<script src="${pageContext.request.contextPath}/fe/js/EasePack.min.js"></script>
+		<script src="${pageContext.request.contextPath}/fe/js/rAF.js"></script>
+		<script src="${pageContext.request.contextPath}/fe/js/demo-1.js"></script>
 		
 		
 		<script type="text/javascript"> 

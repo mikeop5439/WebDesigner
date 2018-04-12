@@ -47,7 +47,7 @@ public class UsersController {
         Date date = new Date();
         usersRegisteredClass.setUser_register(date);
         userLoginAndRegisteredService.usersRegistered(usersRegisteredClass);
-        return "redirect:/LoginAndRegistered/login.jsp";
+        return "redirect:/fe/login.jsp";
     };
 
     //用户名查重
@@ -81,14 +81,14 @@ public class UsersController {
 
         if (userLoginAndRegisteredService.queryUserLogin(user)==0) {
             session.setAttribute("loginError", "登录信息有误");
-            return "redirect:/LoginAndRegistered/login.jsp";
+            return "redirect:/fe/login.jsp";
         }else{
             session.setAttribute("username",user.getUser_name());
             /*date_traffic.setUser_id(user2.getUser_id());
                             date_traffic.setUser_accesstime(logindate);
 
                             userListService.insertuserlogincount(date_traffic);*/
-            return "redirect:/LoginAndRegistered/index.jsp";
+            return "redirect:/index.jsp";
         }
 
 
@@ -99,7 +99,7 @@ public class UsersController {
     public String quitUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.removeAttribute("username");
-        return "redirect:/mainpage/index.jsp";
+        return "redirect:/index.jsp";
     }
 
     //修改用户权限
@@ -120,4 +120,5 @@ public class UsersController {
         user=userLoginAndRegisteredService.queryUserByName(user_name);
         return user;
     }
+
 }

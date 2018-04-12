@@ -72,7 +72,9 @@
 			<!-- 这个配置就是表示拦截器拦截那些请求 -->
 			<!-- <mvc:mapping path="/user/queryAllUsers.action"/> -->
 			<!-- 拦截所有的请求 -->
-			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/**" />
+
+			<!--<mvc:mapping path="/users/queryuserLogin.action"/>-->
 			<bean class="com.webdesign.controller.inteceptor.LoginInterceptor"/>
 		</mvc:interceptor>
 		

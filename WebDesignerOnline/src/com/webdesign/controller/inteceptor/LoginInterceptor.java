@@ -17,62 +17,16 @@ public class LoginInterceptor implements HandlerInterceptor{
                              HttpServletResponse response, Object handler) throws Exception {
         //获取session中的用户对象，判断是否登录
         HttpSession session=request.getSession();
-        User user=(User)session.getAttribute("user");
+        String user= (String) session.getAttribute("username");
         String uri = request.getRequestURI();
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+uri);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+user);
 
-        if(uri.indexOf("queryusercollect") > 0){
+        if(uri.indexOf("manager.jsp") > 0){
             //收藏夹
             if(user != null){return true;}
             else{
-                response.sendRedirect("/gzyz/JSP/RP/login.jsp");
-                return false;
-            }
-        }
-        if(uri.indexOf("personcar.jsp") > 0){
-            //个人中心
-            if(user != null){return true;}
-            else{
-                response.sendRedirect("/gzyz/JSP/RP/login.jsp");
-                return false;
-            }
-        }
-        if(uri.indexOf("queryuserLoginExit") > 0){
-            //退出登录
-            if(user != null){return true;}
-            else{
-
-                return false;
-            }
-        }
-        if(uri.indexOf("queryShoopingCart") > 0){
-            //查询购物车
-            if(user != null){return true;}
-            else{
-                response.sendRedirect("/gzyz/JSP/RP/login.jsp");
-                return false;
-            }
-        }
-        if(uri.indexOf("insertcollect") > 0){
-            //加入收藏夹
-            if(user != null){return true;}
-            else{
-                response.sendRedirect("/gzyz/JSP/RP/login.jsp");
-                return false;
-            }
-        }
-        if(uri.indexOf("addcartorder_details") > 0){
-            //提交订单
-            if(user != null){return true;}
-            else{
-                response.sendRedirect("/gzyz/JSP/RP/login.jsp");
-                return false;
-            }
-        }
-        if(uri.indexOf("addUserCart") > 0){
-            //加入购物车
-            if(user != null){return true;}
-            else{
-                response.sendRedirect("/gzyz/JSP/RP/login.jsp");
+                response.sendRedirect("/WebDesignerOnline/fe/login.jsp");
                 return false;
             }
         }
