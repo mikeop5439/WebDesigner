@@ -92,6 +92,7 @@
 		}
     }
 </script>
+
 </head>
 
 <body>
@@ -195,11 +196,9 @@
 						    </thead>
 						    <tbody id="tableinsert">
 							<tr >
-								<td colspan="2">No matching records found</td>
-								<<%--td>zy</td>
-								<td>ay</td>
-								<td>ax</td>
-								<td><button id="fat-btn" data-loading-text="loading..."  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">删除</button></td>--%>
+								<td colspan="4">No matching records found</td>
+
+
 							</tr>
 							</tbody>
 						</table>
@@ -225,7 +224,7 @@
 				<input type="hidden" id="user_id">
 				<input type="hidden" id="user_falge">
 				<h4  id="myModalLabel" style="text-align: center;">
-					你确认删除吗？
+					你确认更改吗？
 				</h4>
 			</div>
 			
