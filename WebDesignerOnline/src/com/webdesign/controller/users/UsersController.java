@@ -120,4 +120,5 @@ public class UsersController {
         user=userLoginAndRegisteredService.queryUserByName(user_name);
         return user;
     }
+
 }
