@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,81 +20,149 @@
 <script src="${pageContext.request.contextPath}/ht/js/html5shiv.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/respond.min.js"></script>
 <![endif]-->
+
 <script type="text/javascript">
-	function seachuser() {
-        var user_name=$("#seachinput").val();
+
+    function setpage(allpage,nowpage) {
+        var i=1;
+        var page_id="nowpage";
+        var page_pre=nowpage-1;
+        var page_next=nowpage+1;
+        $("#nowpage").val(nowpage);
+        $("#allpage").val(allpage);
+        $("#pageUl").empty();
+        $("#pageUl").append("<li class='page-first'><a href='javascript:queryClassfiyLimit(1)'>&lt;&lt;</a></li>");
+        $("#pageUl").append("<li class='page-pre '><a href='javascript:queryClassfiyLimit("+page_pre+")'>&lt;</a></li>");
+        for(i;i<=allpage;i++){
+            page_id="nowpage";
+            page_id=page_id+i;
+            $("#pageUl").append("<li id='"+page_id+"' class='page-number '><a href='javascript:queryClassfiyLimit("+i+")'>"+i+"</a></li>");
+        }
+        $("#pageUl").append("<li class='page-next '><a href='javascript:queryClassfiyLimit("+page_next+")'>&gt;</a></li>");
+        $("#pageUl").append("<li class='page-last '><a href='javascript:queryClassfiyLimit("+allpage+")'>&gt;&gt;</a></li>");
+        page_id="nowpage"+nowpage;
+        var id="#"+page_id;
+        $("ul.pageUl li").removeClass("active");
+        $(id).addClass("active");
+    }
+    function setpageofseach(allpage,nowpage) {
+        var i=1;
+        var page_id="nowpage";
+        var page_pre;
+        if(  nowpage-1<=0){
+            page_pre=1;
+        }
+        var page_next=nowpage+1;
+        $("#nowpage").val(nowpage);
+        $("#allpage").val(allpage);
+        $("#pageUl").empty();
+        $("#pageUl").append("<li class='page-first'><a href='javascript:seachClassfiyLimit(1)'>&lt;&lt;</a></li>");
+        $("#pageUl").append("<li class='page-pre '><a href='javascript:seachClassfiyLimit("+page_pre+")'>&lt;</a></li>");
+        for(i;i<=allpage;i++){
+            page_id="nowpage";
+            page_id=page_id+i;
+            $("#pageUl").append("<li id='"+page_id+"' class='page-number '><a href='javascript:seachClassfiyLimit("+i+")'>"+i+"</a></li>");
+        }
+        $("#pageUl").append("<li class='page-next '><a href='javascript:seachClassfiyLimit("+page_next+")'>&gt;</a></li>");
+        $("#pageUl").append("<li class='page-last '><a href='javascript:seachClassfiyLimit("+allpage+")'>&gt;&gt;</a></li>");
+        page_id="nowpage"+nowpage;
+        var id="#"+page_id;
+        $("ul.pageUl li").removeClass("active");
+        $(id).addClass("active");
+    }
+
+    function queryClassfiyLimit(nowpage) {
+        $("#tableinsert").empty();
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath }/users/queryUserByName.action",
-            data:"user_name="+user_name,
-            dataType:"json",
+            url:"${pageContext.request.contextPath }/classfiy/queryClassLimit.action?nowpage="+nowpage,
+            contentType:'application/json;charset=utf-8',
             success:function(data){
-                $("#tableinsert").empty();
-                $.each(data,function(index,content){
-                    $("#user_id").val(content.user_id);
-                    $("#user_falge").val(content.user_flage);
-                    var date = "/Date("+content.user_register+")/";
+                setpage(data.allpage,nowpage);
+                $.each(data.classfiy,function(index,content){
                     var tr=$("<tr></tr>");
-                    var flag_txt;
-                    if(content.user_flage==0){
-                        flag_txt="普通用户"
-                        var button=$("<button></button>").attr("id","fat-btn").attr("data-loading-text","loading...").addClass("btn btn-primary btn-sm").attr("data-toggle","modal").attr("data-target","#myModal").append("任命");
-
-                    }else if(content.user_flage==1){
-                        flag_txt="资源管理员"
-                        var button=$("<button></button>").attr("id","fat-btn").attr("data-loading-text","loading...").addClass("btn btn-primary btn-sm").attr("data-toggle","modal").attr("data-target","#myModal").append("卸任");
-
-                    }else if(content.user_flage==2){
-                        flag_txt="站长"
-                    }
-                    var td1=$("<td></td>").append(content.user_name);
-                    var td2=$("<td></td>").append(getDateTime(ConvertJSONDateToJSDate(date)));
-                    var td3=$("<td></td>").attr("id","flage").append(flag_txt);
-                    var td4=$("<td></td>").append(button);
-                    tr.append(td1).append(td2).append(td3).append(td4);
-                    $("#tableinsert").append(tr)
+                    var button=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","修改").attr("data-toggle","modal").attr("data-target","#myModal1").attr("onclick","setClass("+content.spec_id+")").append($("<i></i>").addClass("glyphicon glyphicon  glyphicon-pencil"));
+                    var td1=$("<td></td>").append(content.spec_name);
+                    var td2=$("<td></td>").append(content.spec_desc);
+                    var td3=$("<td></td>").append(button);
+                    tr.append(td1).append(td2).append(td3);
+                    $("#tableinsert").append(tr);
                 });
             }
         });
     }
-    function setManager() {
-        var user_id=$("#user_id").val();
-        if($("#user_falge").val()==0){
-            console.log("任命");
-            $.ajax({
-                type:"POST",
-                url:"${pageContext.request.contextPath }/users/setManager.action",
-                data:"user_id="+user_id,
-                dataType:"json",
-                success:function(data){
-                    $("#flage").empty();
-                    $("#flage").append("资源管理员");
-                    $("#fat-btn").empty();
-                    $("#fat-btn").append("卸任");
-                    $("#user_falge").val(1);
+    function setClass(spec_id) {
+        $.ajax({
+            type:"POST",
+            url:"${pageContext.request.contextPath }/classfiy/queryClassById.action?spec_id="+spec_id,
+            contentType:'application/json;charset=utf-8',
+            success:function(data){
+                spec_id
+                $("#u_spec_id").val(data.spec_id);
+                $("#u_spec_name").val(data.spec_name);
+                $("#u_spec_desc").val(data.spec_desc);
+                if(data.spec_status_cd==12){
+                    $("#u_spec_status_cd_12").attr("checked","");
+                    $("#u_spec_status_cd_22").removeAttr("checked","");
+                }else {
+                    $("#u_spec_status_cd_12").removeAttr("checked","");
+                    $("#u_spec_status_cd_22").attr("checked","");
                 }
-            });
-		}else{
-            console.log("卸任");
-            $.ajax({
-                type:"POST",
-                url:"${pageContext.request.contextPath }/users/nosetManager.action",
-                data:"user_id="+user_id,
-                dataType:"json",
-                success:function(data){
-                    $("#flage").empty();
-                    $("#flage").append("普通用户");
-                    $("#fat-btn").empty();
-                    $("#fat-btn").append("任命");
-                    $("#user_falge").val(0);
-                }
-            });
-		}
+                $("#u_spec_image_src").attr("src","${pageContext.request.contextPath}/"+data.spec_image_src+"");
+            }
+        });
+    }
+    function updateClass() {
+        var option = {
+            url : '${pageContext.request.contextPath }/classfiy/updateClass.action',
+            type : 'POST',
+            dataType : 'json',
+            headers : {"ClientCallMode" : "ajax"}, //添加请求头部
+            success : function(data) {
+            }
+            };
+        $("#form1").ajaxSubmit(option);
+        queryClassfiyLimit($("#nowpage").val());
+    }
+    function insertClass() {
+        var option = {
+            url : '${pageContext.request.contextPath }/classfiy/insertClass.action',
+            type : 'POST',
+            dataType : 'json',
+            headers : {"ClientCallMode" : "ajax"}, //添加请求头部
+            success : function(data) {
+            }
+        };
+        $("#form2").ajaxSubmit(option);
+        queryClassfiyLimit($("#nowpage").val());
+    }
+    function seachClassfiyLimit(nowpage) {
+        $("#tableinsert").empty();
+        var keywords=$("#keywords").val();
+        var params = '{"keywords":"'+keywords+'","nowpage":"'+nowpage+'"}';
+        $.ajax({
+            type:"POST",
+            url:"${pageContext.request.contextPath }/classfiy/seachClassLimit.action",
+            data:params,
+            contentType:'application/json;charset=utf-8',
+            success:function(data){
+                setpageofseach(data.allpage,nowpage);
+                $.each(data.classfiy,function(index,content){
+                    var tr=$("<tr></tr>");
+                    var button=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","修改").attr("data-toggle","modal").attr("data-target","#myModal1").attr("onclick","setClass("+content.spec_id+")").append($("<i></i>").addClass("glyphicon glyphicon  glyphicon-pencil"));
+                    var td1=$("<td></td>").append(content.spec_name);
+                    var td2=$("<td></td>").append(content.spec_desc);
+                    var td3=$("<td></td>").append(button);
+                    tr.append(td1).append(td2).append(td3);
+                    $("#tableinsert").append(tr);
+                });
+            }
+        });
     }
 </script>
 </head>
 
-<body>
+<body >
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -161,14 +230,14 @@
         <div class="panel-body">
           <div class="fixed-table-toolbar">
             <div class="columns btn-group pull-right">
-              <button class="btn btn-default" type="button" name="refresh" title="Refresh" onclick="seachuser()"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
+              <button class="btn btn-default" type="button" name="refresh" title="Refresh" onclick="seachClassfiyLimit(1)"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
               <button class="btn btn-default" type="button" name="toggle" title="Toggle"  data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon glyphicon-plus"></i></button>
               <div class="keep-open btn-group" title="Columns">
                 
               </div>
             </div>
             <div class="pull-right search">
-              <input id="seachinput" class="form-control" type="text" placeholder="Search">
+              <input id="keywords" class="form-control" type="text" placeholder="Search">
             </div>
           </div>
           <table class="table table-striped">
@@ -180,34 +249,20 @@
                 <th>操作</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>001</td>
-                <td>Rammohan </td>
-                <td> <button class="btn btn-default" type="button" name="toggle" title="Toggle" data-toggle="modal" data-target="#myModal1"> <i class="glyphicon glyphicon  glyphicon-pencil"></i></button></td>
-              
-              </tr>
-              <tr>
-                <td>002</td>
-                <td>Smita</td>
-                <td> <button class="btn btn-default" type="button" name="toggle" title="Toggle" data-toggle="modal" data-target="#myModal1"><i class="glyphicon glyphicon  glyphicon-pencil"></i></button></td>
-                
-              </tr>
-              <tr>
-                <td>003</td>
-                <td>Rabindranath</td>
-                <td> <button class="btn btn-default" type="button" name="toggle" title="Toggle" data-toggle="modal" data-target="#myModal1"><i class="glyphicon glyphicon  glyphicon-pencil"></i></button></td>
-               
-              </tr>
+            <tbody id="tableinsert">
+
             </tbody>
           </table>
           <div class="pull-right pagination">
-            <ul class="pagination">
-              <li class="page-first disabled"><a href="javascript:void(0)">&lt;&lt;</a></li>
-              <li class="page-pre disabled"><a href="javascript:void(0)">&lt;</a></li>
-              <li class="page-number active disabled"><a href="javascript:void(0)">1</a></li>
-              <li class="page-next disabled"><a href="javascript:void(0)">&gt;</a></li>
-              <li class="page-last disabled"><a href="javascript:void(0)">&gt;&gt;</a></li>
+              <input type="hidden" id="nowpage" value="1">
+              <input type="hidden" id="allpage" value="1">
+            <ul id="pageUl" class="pagination">
+              <li class="page-first "><a href="javascript:void(0)">&lt;&lt;</a></li>
+              <li class="page-pre "><a href="javascript:void(0)">&lt;</a></li>
+              <li class="page-number active "><a href="javascript:void(0)">1</a></li>
+                <li class="page-number  "><a href="javascript:void(0)">2</a></li>
+                <li class="page-next "><a href="javascript:void(0)">&gt;</a></li>
+              <li class="page-last "><a href="javascript:void(0)">&gt;&gt;</a></li>
             </ul>
           </div>
         </div>
@@ -225,20 +280,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-        <input type="hidden" id="user_id">
-        <input type="hidden" id="user_falge">
         <h4  id="myModalLabel" style="text-align: center;"> 增加 </h4>
       </div>
       <div style="padding:10px;">
-	<form class="bs-example bs-example-form" role="form">
+	<form id="form2" class="bs-example bs-example-form" role="form" action="" method="post" enctype="multipart/form-data">
 		<div class="input-group">
 			<span class="input-group-addon">分类名称</span>
-			<input type="text" class="form-control" placeholder="99">
+			<input type="text" class="form-control" placeholder="请输入分类名称...." name="spec_name" id="i_spec_name">
 		</div>
 		<br>
 		<div class="input-group">
-			<span class="input-group-addon">分类名称</span>
-			<input type="text" class="form-control" placeholder="00">
+			<span class="input-group-addon">分类描述</span>
+			<input type="text" class="form-control" placeholder="请输入分类描述...." name="spec_desc" id="i_spec_desc">
 		</div>
 		<br>
 	<div>
@@ -246,10 +299,10 @@
 	上下架状态&nbsp&nbsp&nbsp&nbsp
 	
 	<label class="radio-inline">
-		<input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked> 选项 1
+		<input type="radio"  name="spec_status_cd" id="i_spec_status_cd_12" value="12" > 上架
 	</label>
 	<label class="radio-inline">
-		<input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 2
+		<input type="radio" name="spec_status_cd" id="i_spec_status_cd_22"  value="22"> 下架
 	</label>
 </div>
 	<br>
@@ -257,12 +310,12 @@
 	
 	<div class="form-group">
 	
-	<div>分类图片&nbsp&nbsp&nbsp&nbsp <img src="../毕业设计/images/about-pic1.png" width="100px;" height="100px;"></div>
-		<label class="sr-only" for="inputfile">文件输入</label>
-		<input type="file" id="inputfile">
+	<div>分类图片&nbsp&nbsp&nbsp&nbsp <img id="i_spec_image_src" src="" width="100px;" height="100px;"></div>
+		<label class="sr-only" for="iclassphoto">文件输入</label>
+		<input type="file" id="iclassphoto" name="iclassphoto" onchange="document.getElementById('iclassphoto').value=this.value" >
 	</div>
 	
-	<center><button type="submit" class="btn btn-default" >提交</button></center>
+	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertClass()">提交</button></center>
 		
 		
 	</form>
@@ -280,20 +333,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-        <input type="hidden" id="user_id">
-        <input type="hidden" id="user_falge">
         <h4  id="myModalLabel" style="text-align: center;"> 修改 </h4>
       </div>
       <div style="padding:10px;">
-	<form class="bs-example bs-example-form" role="form">
+	<form id="form1" class="bs-example bs-example-form" role="form" action="" method="post" enctype="multipart/form-data">
 		<div class="input-group">
 			<span class="input-group-addon">分类名称</span>
-			<input type="text" class="form-control" placeholder="99">
+            <input type="hidden" class="form-control" name="spec_id" id="u_spec_id">
+            <input type="text" class="form-control" name="spec_name" id="u_spec_name">
 		</div>
 		<br>
 		<div class="input-group">
-			<span class="input-group-addon">分类名称</span>
-			<input type="text" class="form-control" placeholder="00">
+			<span class="input-group-addon">分类描述</span>
+			<input type="text" class="form-control"  name="spec_desc" id="u_spec_desc">
 		</div>
 		<br>
 	<div>
@@ -301,10 +353,10 @@
 	上下架状态&nbsp&nbsp&nbsp&nbsp
 	
 	<label class="radio-inline">
-		<input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked> 选项 1
+		<input type="radio" name="spec_status_cd" id="u_spec_status_cd_12" value="12" > 上架
 	</label>
 	<label class="radio-inline">
-		<input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 2
+		<input type="radio" name="spec_status_cd" id="u_spec_status_cd_22"  value="22"> 下架
 	</label>
 </div>
 	<br>
@@ -312,12 +364,12 @@
 	
 	<div class="form-group">
 	
-	<div>分类图片&nbsp&nbsp&nbsp&nbsp <img src="../毕业设计/images/about-pic1.png" width="100px;" height="100px;"></div>
-		<label class="sr-only" for="inputfile">文件输入</label>
-		<input type="file" id="inputfile">
+	<div>分类图片&nbsp&nbsp&nbsp&nbsp <img id="u_spec_image_src" src="" width="100px;" height="100px;"></div>
+		<label class="sr-only" for="classphoto">文件输入</label>
+		<input type="file" id="classphoto" name="classphoto" onchange="document.getElementById('classphoto').value=this.value" >
 	</div>
 	
-	<center><button type="submit" class="btn btn-default" >提交</button></center>
+	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="updateClass()">提交</button></center>
 		
 		
 	</form>
@@ -326,7 +378,7 @@
     <!-- /.modal-content --> 
   </div>
   <!-- /.modal --> 
-<script src="${pageContext.request.contextPath}/ht/js/jquery-1.11.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/ht/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/chart-data.js"></script>
@@ -335,6 +387,7 @@
 <script src="${pageContext.request.contextPath}/ht/js/bootstrap-datepicker.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/bootstrap-table.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/ConvertDate.js"></script>
+<script src="${pageContext.request.contextPath}/ht/js/jquery.form.js"></script>
 <script>
 		!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
@@ -350,5 +403,10 @@
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
 	</script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            queryClassfiyLimit(1);
+        })
+    </script>
 </body>
 </html>

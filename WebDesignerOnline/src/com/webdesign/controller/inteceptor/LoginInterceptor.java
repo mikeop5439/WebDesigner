@@ -19,8 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor{
         HttpSession session=request.getSession();
         String user= (String) session.getAttribute("username");
         String uri = request.getRequestURI();
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+uri);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+user);
+
 
         if(uri.indexOf("manager.jsp") > 0){
             //收藏夹

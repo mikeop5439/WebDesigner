@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件中编写sql语句 -->
+<!-- xml 可以作为配置文件。 -->
+<mapper namespace="com.webdesign.mapper.classfiy.ClassfiyMapper">
+    <!--查询分类(分页)-->
+    <select id="queryClassLimit" parameterType="int" resultType="prod_spec">
+        select * from prod_spec limit #{startindex},12
+    </select>
+    <!--查询分类总数-->
+    <select id="queryClassCount"  resultType="int">
+        select count(*) from prod_spec
+    </select>
+    <!--搜索分类(分页)-->
+    <select id="seachClassLimit" parameterType="keywordsAndNowPage" resultType="prod_spec">
+        select * from prod_spec where spec_name like "%"#{keywords}"%" limit #{startindex},12
+    </select>
+    <!--搜索分类总数-->
+    <select id="seachClassCount"  parameterType="keywordsAndNowPage" resultType="int">
+        select count(*) from prod_spec where spec_name like "%"#{keywords}"%"
+    </select>
+    <!--查询分类-->
+    <select id="queryClassById"  resultType="prod_spec" parameterType="int">
+        select * from prod_spec where spec_id=#{spec_id}
+    </select>
+    <!--修改分类信息-->
+    <update id="updateClass" parameterType="prod_spec">
+        update prod_spec
+        <set >
+            <if test="spec_name != null" >
+                spec_name = #{spec_name,jdbcType=VARCHAR},
+            </if>
+            <if test="spec_desc != null" >
+                spec_desc = #{spec_desc,jdbcType=VARCHAR},
+            </if>
+            <if test="spec_status_cd != null" >
+                spec_status_cd = #{spec_status_cd,jdbcType=DECIMAL},
+            </if>
+            <if test="spec_image_src != null" >
+                spec_image_src = #{spec_image_src,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where spec_id=#{spec_id}
+    </update>
+    <!--新增分类信息-->
+    <insert id="insertClass" parameterType="prod_spec">
+        insert into prod_spec(spec_name,spec_desc,spec_status_cd,spec_image_src) values (#{spec_name},#{spec_desc},#{spec_status_cd},#{spec_image_src})
+    </insert>
+
+</mapper>
