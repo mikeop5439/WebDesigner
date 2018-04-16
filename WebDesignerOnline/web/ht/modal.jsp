@@ -186,8 +186,8 @@
     </div>
   </form>
   <ul class="nav menu">
-    <li class="active"><a href="index.html"><span class="glyphicon glyphicon-dashboard"></span> 分类管理</a></li>
-    <li><a href="modal.html"><span class="glyphicon glyphicon-th"></span> 资源管理</a></li>
+    <li ><a href="index.html"><span class="glyphicon glyphicon-dashboard"></span> 分类管理</a></li>
+    <li class="active"><a href="widgets.html"><span class="glyphicon glyphicon-th"></span> 资源管理</a></li>
     <li><a href="manager.jsp"><span class="glyphicon glyphicon-list-alt"></span> 权限管理</a></li>
     <li><a href="charts.html"><span class="glyphicon glyphicon-stats"></span> 数据分析</a></li>
     <li><a href="forms.html"><span class="glyphicon glyphicon-pencil"></span> Forms</a></li>
@@ -210,7 +210,7 @@
   <div class="row">
     <ol class="breadcrumb">
       <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-      <li class="active">权限管理</li>
+      <li class="active">资源管理</li>
     </ol>
   </div>
   <!--/.row-->
@@ -226,7 +226,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-default">
-        <div class="panel-heading">分类管理</div>
+        <div class="panel-heading">资源管理</div>
         <div class="panel-body">
           <div class="fixed-table-toolbar">
             <div class="columns btn-group pull-right">
@@ -243,14 +243,22 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>分类名称</th>
-                <th>分类描述</th>
+                <th>模版名称</th>
+                <th>模版描述</th>
                
                 <th>操作</th>
               </tr>
             </thead>
             <tbody id="tableinsert">
+            <tr>
+            	
+                <td>003</td>
+                <td>Rabindranath</td>
+                <td> <button class="btn btn-default" type="button" name="toggle" title="Toggle" data-toggle="modal" data-target="#myModal1"><i class="glyphicon glyphicon  glyphicon-pencil"></i></button></td>
+               
+              </tr>
 
+           
             </tbody>
           </table>
           <div class="pull-right pagination">
@@ -285,13 +293,13 @@
       <div style="padding:10px;">
 	<form id="form2" class="bs-example bs-example-form" role="form" action="" method="post" enctype="multipart/form-data">
 		<div class="input-group">
-			<span class="input-group-addon">分类名称</span>
-			<input type="text" class="form-control" placeholder="请输入分类名称...." name="spec_name" id="i_spec_name">
+			<span class="input-group-addon">模版名称</span>
+			<input type="text" class="form-control" placeholder="请输入模版名称...." name="spec_name" id="i_spec_name">
 		</div>
 		<br>
 		<div class="input-group">
-			<span class="input-group-addon">分类描述</span>
-			<input type="text" class="form-control" placeholder="请输入分类描述...." name="spec_desc" id="i_spec_desc">
+			<span class="input-group-addon">模版描述</span>
+			<input type="text" class="form-control" placeholder="请输模版描述...." name="spec_desc" id="i_spec_desc">
 		</div>
 		<br>
 	<div>
@@ -310,10 +318,28 @@
 	
 	<div class="form-group">
 	
-	<div>分类图片&nbsp&nbsp&nbsp&nbsp <img id="i_spec_image_src" src="" width="100px;" height="100px;"></div>
+	<div>模版图片&nbsp&nbsp&nbsp&nbsp <img id="i_spec_image_src" src="" width="100px;" height="100px;"></div>
 		<label class="sr-only" for="iclassphoto">文件输入</label>
 		<input type="file" id="iclassphoto" name="iclassphoto" onchange="document.getElementById('iclassphoto').value=this.value" >
 	</div>
+	
+	<div class="form-group">
+	
+	<div style="margin-bottom: 10px;">上传代码&nbsp&nbsp </div>
+		<label class="sr-only" for="classphoto">文件输入</label>
+		<input type="file" id="classphoto" name="classphoto" onchange="document.getElementById('classphoto').value=this.value" >
+	</div>
+	
+	<div>
+	
+	选择分类 &nbsp;&nbsp;
+	
+	<select>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select></div>
 	
 	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertClass()">提交</button></center>
 		
@@ -338,13 +364,13 @@
       <div style="padding:10px;">
 	<form id="form1" class="bs-example bs-example-form" role="form" action="" method="post" enctype="multipart/form-data">
 		<div class="input-group">
-			<span class="input-group-addon">分类名称</span>
+			<span class="input-group-addon">模版名称</span>
             <input type="hidden" class="form-control" name="spec_id" id="u_spec_id">
             <input type="text" class="form-control" name="spec_name" id="u_spec_name">
 		</div>
 		<br>
 		<div class="input-group">
-			<span class="input-group-addon">分类描述</span>
+			<span class="input-group-addon">模版描述</span>
 			<input type="text" class="form-control"  name="spec_desc" id="u_spec_desc">
 		</div>
 		<br>
@@ -364,10 +390,28 @@
 	
 	<div class="form-group">
 	
-	<div>分类图片&nbsp&nbsp&nbsp&nbsp <img id="u_spec_image_src" src="" width="100px;" height="100px;"></div>
+	<div>模版图片&nbsp&nbsp&nbsp&nbsp <img id="u_spec_image_src" src="" width="100px;" height="100px;"></div>
 		<label class="sr-only" for="classphoto">文件输入</label>
 		<input type="file" id="classphoto" name="classphoto" onchange="document.getElementById('classphoto').value=this.value" >
 	</div>
+	
+	<div class="form-group">
+	
+	<div style="margin-bottom: 10px;">上传代码&nbsp&nbsp </div>
+		<label class="sr-only" for="classphoto">文件输入</label>
+		<input type="file" id="classphoto" name="classphoto" onchange="document.getElementById('classphoto').value=this.value" >
+	</div>
+	
+	<div>
+	
+	选择分类 &nbsp;&nbsp;
+	
+	<select>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select></div>
 	
 	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="updateClass()">提交</button></center>
 		
@@ -378,7 +422,7 @@
     <!-- /.modal-content --> 
   </div>
   <!-- /.modal --> 
-<script src="${pageContext.request.contextPath}/ht/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/ht/js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/chart-data.js"></script>
@@ -403,10 +447,10 @@
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
 	</script>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         $(document).ready(function(){
             queryClassfiyLimit(1);
         })
-    </script>
+    </script>-->
 </body>
 </html>

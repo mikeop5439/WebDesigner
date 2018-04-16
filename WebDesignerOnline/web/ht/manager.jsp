@@ -128,7 +128,7 @@
 		</form>
 		<ul class="nav menu">
 			<li><a href="classfiy.jsp"><span class="glyphicon glyphicon-dashboard"></span> 分类管理</a></li>
-			<li><a href="widgets.html"><span class="glyphicon glyphicon-th"></span> 资源管理</a></li>
+			<li><a href="modal.jsp"><span class="glyphicon glyphicon-th"></span> 资源管理</a></li>
 			<li class="active"><a href="manager.jsp"><span class="glyphicon glyphicon-list-alt"></span> 权限管理</a></li>
 			<li><a href="charts.html"><span class="glyphicon glyphicon-stats"></span> 数据分析</a></li>
 			<li><a href="forms.html"><span class="glyphicon glyphicon-pencil"></span> Forms</a></li>
