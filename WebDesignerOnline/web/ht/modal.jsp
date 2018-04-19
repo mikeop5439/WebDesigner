@@ -31,15 +31,15 @@
         $("#nowpage").val(nowpage);
         $("#allpage").val(allpage);
         $("#pageUl").empty();
-        $("#pageUl").append("<li class='page-first'><a href='javascript:queryClassfiyLimit(1)'>&lt;&lt;</a></li>");
-        $("#pageUl").append("<li class='page-pre '><a href='javascript:queryClassfiyLimit("+page_pre+")'>&lt;</a></li>");
+        $("#pageUl").append("<li class='page-first'><a href='javascript:queryModalfiyLimit(1)'>&lt;&lt;</a></li>");
+        $("#pageUl").append("<li class='page-pre '><a href='javascript:queryModalfiyLimit("+page_pre+")'>&lt;</a></li>");
         for(i;i<=allpage;i++){
             page_id="nowpage";
             page_id=page_id+i;
-            $("#pageUl").append("<li id='"+page_id+"' class='page-number '><a href='javascript:queryClassfiyLimit("+i+")'>"+i+"</a></li>");
+            $("#pageUl").append("<li id='"+page_id+"' class='page-number '><a href='javascript:queryModalfiyLimit("+i+")'>"+i+"</a></li>");
         }
-        $("#pageUl").append("<li class='page-next '><a href='javascript:queryClassfiyLimit("+page_next+")'>&gt;</a></li>");
-        $("#pageUl").append("<li class='page-last '><a href='javascript:queryClassfiyLimit("+allpage+")'>&gt;&gt;</a></li>");
+        $("#pageUl").append("<li class='page-next '><a href='javascript:queryModalfiyLimit("+page_next+")'>&gt;</a></li>");
+        $("#pageUl").append("<li class='page-last '><a href='javascript:queryModalfiyLimit("+allpage+")'>&gt;&gt;</a></li>");
         page_id="nowpage"+nowpage;
         var id="#"+page_id;
         $("ul.pageUl li").removeClass("active");
@@ -56,34 +56,34 @@
         $("#nowpage").val(nowpage);
         $("#allpage").val(allpage);
         $("#pageUl").empty();
-        $("#pageUl").append("<li class='page-first'><a href='javascript:seachClassfiyLimit(1)'>&lt;&lt;</a></li>");
-        $("#pageUl").append("<li class='page-pre '><a href='javascript:seachClassfiyLimit("+page_pre+")'>&lt;</a></li>");
+        $("#pageUl").append("<li class='page-first'><a href='javascript:seachModalLimit(1)'>&lt;&lt;</a></li>");
+        $("#pageUl").append("<li class='page-pre '><a href='javascript:seachModalLimit("+page_pre+")'>&lt;</a></li>");
         for(i;i<=allpage;i++){
             page_id="nowpage";
             page_id=page_id+i;
-            $("#pageUl").append("<li id='"+page_id+"' class='page-number '><a href='javascript:seachClassfiyLimit("+i+")'>"+i+"</a></li>");
+            $("#pageUl").append("<li id='"+page_id+"' class='page-number '><a href='javascript:seachModalLimit("+i+")'>"+i+"</a></li>");
         }
-        $("#pageUl").append("<li class='page-next '><a href='javascript:seachClassfiyLimit("+page_next+")'>&gt;</a></li>");
-        $("#pageUl").append("<li class='page-last '><a href='javascript:seachClassfiyLimit("+allpage+")'>&gt;&gt;</a></li>");
+        $("#pageUl").append("<li class='page-next '><a href='javascript:seachModalLimit("+page_next+")'>&gt;</a></li>");
+        $("#pageUl").append("<li class='page-last '><a href='javascript:seachModalLimit("+allpage+")'>&gt;&gt;</a></li>");
         page_id="nowpage"+nowpage;
         var id="#"+page_id;
         $("ul.pageUl li").removeClass("active");
         $(id).addClass("active");
     }
 
-    function queryClassfiyLimit(nowpage) {
+    function queryModalfiyLimit(nowpage) {
         $("#tableinsert").empty();
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath }/classfiy/queryClassLimit.action?nowpage="+nowpage,
+            url:"${pageContext.request.contextPath }/modal/queryModalLimit.action?nowpage="+nowpage,
             contentType:'application/json;charset=utf-8',
             success:function(data){
                 setpage(data.allpage,nowpage);
-                $.each(data.classfiy,function(index,content){
+                $.each(data.prods,function(index,content){
                     var tr=$("<tr></tr>");
-                    var button=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","修改").attr("data-toggle","modal").attr("data-target","#myModal1").attr("onclick","setClass("+content.spec_id+")").append($("<i></i>").addClass("glyphicon glyphicon  glyphicon-pencil"));
-                    var td1=$("<td></td>").append(content.spec_name);
-                    var td2=$("<td></td>").append(content.spec_desc);
+                    var button=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","修改").attr("data-toggle","modal").attr("data-target","#myModal1").attr("onclick","setModal("+content.prod_id+")").append($("<i></i>").addClass("glyphicon glyphicon  glyphicon-pencil"));
+                    var td1=$("<td></td>").append(content.prod_name);
+                    var td2=$("<td></td>").append(content.prod_desc);
                     var td3=$("<td></td>").append(button);
                     tr.append(td1).append(td2).append(td3);
                     $("#tableinsert").append(tr);
@@ -91,30 +91,51 @@
             }
         });
     }
-    function setClass(spec_id) {
+    function setModal(prod_id) {
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath }/classfiy/queryClassById.action?spec_id="+spec_id,
+            url:"${pageContext.request.contextPath }/modal/queryModalById.action?prod_id="+prod_id,
             contentType:'application/json;charset=utf-8',
             success:function(data){
-                spec_id
-                $("#u_spec_id").val(data.spec_id);
-                $("#u_spec_name").val(data.spec_name);
-                $("#u_spec_desc").val(data.spec_desc);
-                if(data.spec_status_cd==12){
-                    $("#u_spec_status_cd_12").attr("checked","");
-                    $("#u_spec_status_cd_22").removeAttr("checked","");
+                $("#u_prod_id").val(data.prod_id);
+                $("#u_prod_name").val(data.prod_name);
+                $("#u_prod_desc").val(data.prod_desc);
+                if(data.prod_status_cd==12){
+                    $("#u_prod_status_cd_12").attr("checked","");
+                    $("#u_prod_status_cd_22").removeAttr("checked","");
                 }else {
-                    $("#u_spec_status_cd_12").removeAttr("checked","");
-                    $("#u_spec_status_cd_22").attr("checked","");
+                    $("#u_prod_status_cd_12").removeAttr("checked","");
+                    $("#u_prod_status_cd_22").attr("checked","");
                 }
-                $("#u_spec_image_src").attr("src","${pageContext.request.contextPath}/"+data.spec_image_src+"");
+                $("#selectofclassfiy").empty();
+                $.each(data.list_spec,function(index,content){
+                    var option=$("<option></option>");
+                    option.attr("id","select"+content.spec_id).attr("value",content.spec_id).append(content.spec_name);
+                    $("#selectofclassfiy").append(option);
+                });
+                $("#select"+data.prod_spec.spec_id).attr("selected","");
+                $("#u_prod_image_src").attr("src","${pageContext.request.contextPath}/"+data.prod_image_src+"");
             }
         });
     }
-    function updateClass() {
+    function setClass(prod_id) {
+        $.ajax({
+            type:"POST",
+            url:"${pageContext.request.contextPath }/modal/queryModalById.action?prod_id="+prod_id,
+            contentType:'application/json;charset=utf-8',
+            success:function(data){
+                $("#iselectofclassfiy").empty();
+                $.each(data.list_spec,function(index,content){
+                    var option=$("<option></option>");
+                    option.attr("id","select"+content.spec_id).attr("value",content.spec_id).append(content.spec_name);
+                    $("#iselectofclassfiy").append(option);
+                });
+            }
+        });
+    }
+    function updateModal() {
         var option = {
-            url : '${pageContext.request.contextPath }/classfiy/updateClass.action',
+            url : '${pageContext.request.contextPath }/modal/updateModal.action',
             type : 'POST',
             dataType : 'json',
             headers : {"ClientCallMode" : "ajax"}, //添加请求头部
@@ -122,11 +143,11 @@
             }
             };
         $("#form1").ajaxSubmit(option);
-        queryClassfiyLimit($("#nowpage").val());
+        queryModalfiyLimit($("#nowpage").val());
     }
-    function insertClass() {
+    function insertModel() {
         var option = {
-            url : '${pageContext.request.contextPath }/classfiy/insertClass.action',
+            url : '${pageContext.request.contextPath }/modal/insertModal.action',
             type : 'POST',
             dataType : 'json',
             headers : {"ClientCallMode" : "ajax"}, //添加请求头部
@@ -134,24 +155,24 @@
             }
         };
         $("#form2").ajaxSubmit(option);
-        queryClassfiyLimit($("#nowpage").val());
+        queryModalfiyLimit($("#nowpage").val());
     }
-    function seachClassfiyLimit(nowpage) {
+    function seachModalLimit(nowpage) {
         $("#tableinsert").empty();
         var keywords=$("#keywords").val();
         var params = '{"keywords":"'+keywords+'","nowpage":"'+nowpage+'"}';
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath }/classfiy/seachClassLimit.action",
+            url:"${pageContext.request.contextPath }/modal/seachModalLimit.action",
             data:params,
             contentType:'application/json;charset=utf-8',
             success:function(data){
                 setpageofseach(data.allpage,nowpage);
-                $.each(data.classfiy,function(index,content){
+                $.each(data.prods,function(index,content){
                     var tr=$("<tr></tr>");
-                    var button=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","修改").attr("data-toggle","modal").attr("data-target","#myModal1").attr("onclick","setClass("+content.spec_id+")").append($("<i></i>").addClass("glyphicon glyphicon  glyphicon-pencil"));
-                    var td1=$("<td></td>").append(content.spec_name);
-                    var td2=$("<td></td>").append(content.spec_desc);
+                    var button=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","修改").attr("data-toggle","modal").attr("data-target","#myModal1").attr("onclick","setModal("+content.prod_id+")").append($("<i></i>").addClass("glyphicon glyphicon  glyphicon-pencil"));
+                    var td1=$("<td></td>").append(content.prod_name);
+                    var td2=$("<td></td>").append(content.prod_desc);
                     var td3=$("<td></td>").append(button);
                     tr.append(td1).append(td2).append(td3);
                     $("#tableinsert").append(tr);
@@ -230,8 +251,8 @@
         <div class="panel-body">
           <div class="fixed-table-toolbar">
             <div class="columns btn-group pull-right">
-              <button class="btn btn-default" type="button" name="refresh" title="Refresh" onclick="seachClassfiyLimit(1)"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
-              <button class="btn btn-default" type="button" name="toggle" title="Toggle"  data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon glyphicon-plus"></i></button>
+              <button class="btn btn-default" type="button" name="refresh" title="Refresh" onclick="seachModalLimit(1)"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
+              <button class="btn btn-default" type="button" name="toggle" title="Toggle"  data-toggle="modal" onclick="setClass(1)" data-target="#myModal"><i class="glyphicon glyphicon glyphicon-plus"></i></button>
               <div class="keep-open btn-group" title="Columns">
                 
               </div>
@@ -294,12 +315,12 @@
 	<form id="form2" class="bs-example bs-example-form" role="form" action="" method="post" enctype="multipart/form-data">
 		<div class="input-group">
 			<span class="input-group-addon">模版名称</span>
-			<input type="text" class="form-control" placeholder="请输入模版名称...." name="spec_name" id="i_spec_name">
+			<input type="text" class="form-control" placeholder="请输入模版名称...." name="prod_name" id="i_prod_name">
 		</div>
 		<br>
 		<div class="input-group">
 			<span class="input-group-addon">模版描述</span>
-			<input type="text" class="form-control" placeholder="请输模版描述...." name="spec_desc" id="i_spec_desc">
+			<input type="text" class="form-control" placeholder="请输模版描述...." name="prod_desc" id="i_prod_desc">
 		</div>
 		<br>
 	<div>
@@ -307,10 +328,10 @@
 	上下架状态&nbsp&nbsp&nbsp&nbsp
 	
 	<label class="radio-inline">
-		<input type="radio"  name="spec_status_cd" id="i_spec_status_cd_12" value="12" > 上架
+		<input type="radio"  name="prod_status_cd" id="i_prod_status_cd_12" value="12" > 上架
 	</label>
 	<label class="radio-inline">
-		<input type="radio" name="spec_status_cd" id="i_spec_status_cd_22"  value="22"> 下架
+		<input type="radio" name="prod_status_cd" id="i_prod_status_cd_22"  value="22"> 下架
 	</label>
 </div>
 	<br>
@@ -318,30 +339,27 @@
 	
 	<div class="form-group">
 	
-	<div>模版图片&nbsp&nbsp&nbsp&nbsp <img id="i_spec_image_src" src="" width="100px;" height="100px;"></div>
+	<div>模版图片&nbsp&nbsp&nbsp&nbsp <img id="i_prod_image_src" src="" width="100px;" height="100px;"></div>
 		<label class="sr-only" for="iclassphoto">文件输入</label>
-		<input type="file" id="iclassphoto" name="iclassphoto" onchange="document.getElementById('iclassphoto').value=this.value" >
+		<input type="file" id="iclassphoto" name="iclassphoto"  >
 	</div>
 	
 	<div class="form-group">
 	
 	<div style="margin-bottom: 10px;">上传代码&nbsp&nbsp </div>
-		<label class="sr-only" for="classphoto">文件输入</label>
-		<input type="file" id="classphoto" name="classphoto" onchange="document.getElementById('classphoto').value=this.value" >
+		<label class="sr-only" for="fileupdate">文件输入</label>
+		<input type="file" id="fileupdate" name="fileupdate"  >
 	</div>
 	
 	<div>
 	
 	选择分类 &nbsp;&nbsp;
+
+        <select name="spec_id" id="iselectofclassfiy">
+
+        </select></div>
 	
-	<select>
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
-</select></div>
-	
-	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertClass()">提交</button></center>
+	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="insertModel()">提交</button></center>
 		
 		
 	</form>
@@ -365,13 +383,13 @@
 	<form id="form1" class="bs-example bs-example-form" role="form" action="" method="post" enctype="multipart/form-data">
 		<div class="input-group">
 			<span class="input-group-addon">模版名称</span>
-            <input type="hidden" class="form-control" name="spec_id" id="u_spec_id">
-            <input type="text" class="form-control" name="spec_name" id="u_spec_name">
+            <input type="hidden" class="form-control" name="prod_id" id="u_prod_id">
+            <input type="text" class="form-control" name="prod_name" id="u_prod_name">
 		</div>
 		<br>
 		<div class="input-group">
 			<span class="input-group-addon">模版描述</span>
-			<input type="text" class="form-control"  name="spec_desc" id="u_spec_desc">
+			<input type="textarea" class="form-control"  name="prod_desc" id="u_prod_desc">
 		</div>
 		<br>
 	<div>
@@ -379,10 +397,10 @@
 	上下架状态&nbsp&nbsp&nbsp&nbsp
 	
 	<label class="radio-inline">
-		<input type="radio" name="spec_status_cd" id="u_spec_status_cd_12" value="12" > 上架
+		<input type="radio" name="prod_status_cd" id="u_prod_status_cd_12" value="12" > 上架
 	</label>
 	<label class="radio-inline">
-		<input type="radio" name="spec_status_cd" id="u_spec_status_cd_22"  value="22"> 下架
+		<input type="radio" name="prod_status_cd" id="u_prod_status_cd_22"  value="22"> 下架
 	</label>
 </div>
 	<br>
@@ -390,30 +408,23 @@
 	
 	<div class="form-group">
 	
-	<div>模版图片&nbsp&nbsp&nbsp&nbsp <img id="u_spec_image_src" src="" width="100px;" height="100px;"></div>
+	<div>模版图片&nbsp&nbsp&nbsp&nbsp <img id="u_prod_image_src" src="" width="100px;" height="100px;"></div>
 		<label class="sr-only" for="classphoto">文件输入</label>
-		<input type="file" id="classphoto" name="classphoto" onchange="document.getElementById('classphoto').value=this.value" >
+		<input type="file" id="classphoto" name="classphoto"  >
 	</div>
 	
 	<div class="form-group">
-	
-	<div style="margin-bottom: 10px;">上传代码&nbsp&nbsp </div>
-		<label class="sr-only" for="classphoto">文件输入</label>
-		<input type="file" id="classphoto" name="classphoto" onchange="document.getElementById('classphoto').value=this.value" >
-	</div>
+
 	
 	<div>
 	
 	选择分类 &nbsp;&nbsp;
 	
-	<select>
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
-</select></div>
+	<select name="spec_id" id="selectofclassfiy">
+
+    </select></div>
 	
-	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="updateClass()">提交</button></center>
+	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="updateModal()">提交</button></center>
 		
 		
 	</form>
@@ -447,10 +458,10 @@
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
 	</script>
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function(){
-            queryClassfiyLimit(1);
+            queryModalfiyLimit(1);
         })
-    </script>-->
+    </script>
 </body>
 </html>

@@ -2,12 +2,15 @@
   <artifact type="exploded-war" name="WebDesignerOnline:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/WebDesignerOnline_war_exploded</output-path>
     <root id="root">
+      <element id="javaee-facet-resources" facet="WebDesignerOnline/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="WebDesignerOnline" />
           <element id="module-output" name="WebDesigner" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+          <element id="library" level="project" name="servlet-api" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/jstl-1.2.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/asm-3.3.1.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/junit-4.9.jar" />
@@ -33,6 +36,7 @@
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/spring-core-3.2.0.RELEASE.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/spring-jdbc-3.2.0.RELEASE.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/spring-test-3.2.0.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/org.apache.tools.ant-1.6.5.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/spring-beans-3.2.0.RELEASE.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/spring-webmvc-3.2.0.RELEASE.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/spring-aspects-3.2.0.RELEASE.jar" />
@@ -48,10 +52,8 @@
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/com.springsource.org.apache.commons.logging-1.1.1.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/com.springsource.org.apache.commons.dbcp-1.2.2.osgi.jar" />
-          <element id="library" level="project" name="servlet-api" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="WebDesignerOnline/web/Web" />
     </root>
   </artifact>
 </component>

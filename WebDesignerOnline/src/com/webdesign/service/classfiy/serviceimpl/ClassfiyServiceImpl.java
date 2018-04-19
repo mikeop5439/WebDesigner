@@ -50,4 +50,9 @@ public class ClassfiyServiceImpl implements ClassfiyService {
     public void insertClass(Prod_spec prod_spec) {
         classfiyMapper.insertClass(prod_spec);
     }
+
+    @Override
+    public int seachClassByName(KeywordsAndNowPage keywordsAndNowPage) {
+        return classfiyMapper.seachClassByName(keywordsAndNowPage);
+    }
 }

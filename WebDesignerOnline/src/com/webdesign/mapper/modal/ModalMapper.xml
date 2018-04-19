@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件中编写sql语句 -->
+<!-- xml 可以作为配置文件。 -->
+<mapper namespace="com.webdesign.mapper.modal.ModalMapper">
+
+    <resultMap type="ProdAndClassfiy" id="prodAndClassfiyResultMap">
+        <id column="prod_id" property="prod_id"/>
+        <result column="prod_name" property="prod_name"/>
+        <result column="prod_desc" property="prod_desc"/>
+        <result column="effect_date" property="effect_date"/>
+        <result column="service_src" property="service_src"/>
+        <result column="prod_status_cd" property="prod_status_cd"/>
+        <result column="prod_image_src" property="prod_image_src"/>
+
+        <association property="prod_spec" javaType="prod_spec">
+            <id column="spec_id" property="spec_id"/>
+            <result column="spec_name" property="spec_name"/>
+        </association>
+    </resultMap>
+    <!--查询模板（分页）-->
+    <select id="queryModalLimit" parameterType="int" resultType="prod">
+        select * from prod limit #{startindex},12
+    </select>
+    <!--查询分类总数-->
+    <select id="queryModalCount"  resultType="int">
+        select count(*) from prod
+    </select>
+    <!--查询模板-->
+    <select id="queryModalById"  resultMap="prodAndClassfiyResultMap" parameterType="int">
+        SELECT p.*,ps.spec_name spec_name from prod p,prod_spec ps where p.prod_id=#{prod_id} and p.spec_id=ps.spec_id
+    </select>
+    <!--查询全部分类-->
+    <select id="queryAllClass"  resultType="prod_spec" >
+        select * from prod_spec
+    </select>
+    <!--修改模板信息-->
+    <update id="updateModal" parameterType="prod">
+        update prod
+        <set >
+            <if test="prod_name != null" >
+                prod_name = #{prod_name,jdbcType=VARCHAR},
+            </if>
+            <if test="prod_desc != null" >
+                prod_desc = #{prod_desc,jdbcType=VARCHAR},
+            </if>
+            <if test="prod_status_cd != null" >
+                prod_status_cd = #{prod_status_cd,jdbcType=DECIMAL},
+            </if>
+            <if test="prod_image_src != null" >
+                prod_image_src = #{prod_image_src,jdbcType=DECIMAL},
+            </if>
+            <if test="spec_id != null" >
+                spec_id = #{spec_id,jdbcType=DECIMAL},
+            </if>
+            <if test="service_src != null" >
+                service_src = #{service_src,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where prod_id=#{prod_id}
+    </update>
+    <!--搜索模板总数-->
+    <select id="seachModalCount"  parameterType="keywordsAndNowPage" resultType="int">
+        select count(*) from prod where prod_name like "%"#{keywords}"%"
+    </select>
+    <!--搜索模板(分页)-->
+    <select id="seachModalLimit" parameterType="keywordsAndNowPage" resultType="prod">
+        select * from prod where prod_name like "%"#{keywords}"%" limit #{startindex},12
+    </select>
+    <!--新增模板信息-->
+    <insert id="insertModal" parameterType="prod">
+        insert into prod(prod_name,spec_id,prod_desc,prod_status_cd,effect_date) values (#{prod_name},#{spec_id},#{prod_desc},#{prod_status_cd},#{effect_date})
+    </insert>
+    <!--通过名字搜索模板-->
+    <select id="seachModalByName"  parameterType="keywordsAndNowPage" resultType="int">
+        select prod_id from prod where prod_name like "%"#{keywords}"%"
+    </select>
+
+</mapper>

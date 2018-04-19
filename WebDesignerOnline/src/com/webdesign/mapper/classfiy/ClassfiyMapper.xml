@@ -48,5 +48,9 @@
     <insert id="insertClass" parameterType="prod_spec">
         insert into prod_spec(spec_name,spec_desc,spec_status_cd,spec_image_src) values (#{spec_name},#{spec_desc},#{spec_status_cd},#{spec_image_src})
     </insert>
+    <!--通过名字搜索分类-->
+    <select id="seachClassByName"  parameterType="keywordsAndNowPage" resultType="int">
+        select spec_id from prod_spec where spec_name like "%"#{keywords}"%"
+    </select>
 
 </mapper>

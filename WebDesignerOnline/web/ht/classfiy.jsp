@@ -378,7 +378,7 @@
     <!-- /.modal-content --> 
   </div>
   <!-- /.modal --> 
-<script src="${pageContext.request.contextPath}/ht/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/ht/js/jquery-1.11.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/chart.min.js"></script>
 <script src="${pageContext.request.contextPath}/ht/js/chart-data.js"></script>

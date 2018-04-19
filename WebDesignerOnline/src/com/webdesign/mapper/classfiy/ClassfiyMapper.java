@@ -20,4 +20,6 @@ public interface ClassfiyMapper {
     public void updateClass(Prod_spec prod_spec);
     //新增分类信息
     public void insertClass(Prod_spec prod_spec);
+    //通过名字搜索分类
+    public int seachClassByName(KeywordsAndNowPage keywordsAndNowPage);
 }

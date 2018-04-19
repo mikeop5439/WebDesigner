@@ -1,6 +1,9 @@
 package com.webdesign.test;
 
+import com.webdesign.bean.modal.extend.ProdAndClassfiy;
+import com.webdesign.service.modal.service.ModalService;
 import com.webdesign.service.users.service.UserLoginAndRegisteredService;
+import com.webdesign.tools.ZipUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +17,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:com/config/applicationContext.xml"})
 public class AddTest {
     @Autowired
-    private UserLoginAndRegisteredService userLoginAndRegisteredService;
+    private ModalService modalService;
     @Test
     public void test1(){
-        String userCode="1233";
-        String verificationCode="1233";
 
-            System.out.println(userCode.equals(verificationCode));
-
+      /*  ZipUtil zipUtil=new ZipUtil();
+        zipUtil.unZip();
+*/
     }
 
 }

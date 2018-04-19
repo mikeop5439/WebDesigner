@@ -95,17 +95,20 @@ public class ClassfiyController {
         }
         classfiyService.updateClass(prod_spec);
     }
-    //修改分类信息
+    //新增分类信息
     @RequestMapping("insertClass")
     public  @ResponseBody void  insertClass(@RequestParam(value = "iclassphoto",required = false)MultipartFile iclassphoto, HttpServletRequest request, Prod_spec prod_spec, HttpSession session){
         if (iclassphoto != null && iclassphoto.getOriginalFilename() != null) {
             if (!iclassphoto.isEmpty()) {
                 try {
+                    classfiyService.insertClass(prod_spec);
+                    KeywordsAndNowPage keywordsAndNowPage =new KeywordsAndNowPage();
+                    keywordsAndNowPage.setKeywords(prod_spec.getSpec_name());
+
                     String path = session.getServletContext().getRealPath("/document/resource/classfiy/images");
 
                     String realName="";
-
-                    realName = realName+prod_spec.getSpec_id()+".jpg";
+                    realName = realName+classfiyService.seachClassByName(keywordsAndNowPage) +".jpg";
 
                     String realFilePath = path+File.separator+realName;
 
@@ -113,8 +116,9 @@ public class ClassfiyController {
 
                     File file = new File(realFilePath);
                     iclassphoto.transferTo(file);
+                    prod_spec.setSpec_id(classfiyService.seachClassByName(keywordsAndNowPage));
                     prod_spec.setSpec_image_src(saveFilePath);
-
+                    classfiyService.updateClass(prod_spec);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -123,7 +127,8 @@ public class ClassfiyController {
             String realName="none.png";
             String saveFilePath = File.separator+"document"+File.separator+"resource"+File.separator+"classfiy"+File.separator+"images"+File.separator+realName;
             prod_spec.setSpec_image_src(saveFilePath);
+            classfiyService.insertClass(prod_spec);
         }
-        classfiyService.insertClass(prod_spec);
+
     }
 }
