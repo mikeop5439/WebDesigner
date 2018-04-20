@@ -61,4 +61,9 @@ public class MoadlServiceImpl implements ModalService {
     public int seachModalByName(KeywordsAndNowPage keywordsAndNowPage) {
         return modalMapper.seachModalByName(keywordsAndNowPage);
     }
+
+    @Override
+    public void deleteModal(int prod_id) {
+        modalMapper.deleteModal(prod_id);
+    }
 }

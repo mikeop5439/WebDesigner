@@ -77,5 +77,8 @@
     <select id="seachModalByName"  parameterType="keywordsAndNowPage" resultType="int">
         select prod_id from prod where prod_name like "%"#{keywords}"%"
     </select>
-
+    <!--删除模板-->
+    <delete id="deleteModal" parameterType="int">
+        delete from prod where prod_id=#{prod_id}
+    </delete>
 </mapper>

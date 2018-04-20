@@ -82,9 +82,10 @@
                 $.each(data.prods,function(index,content){
                     var tr=$("<tr></tr>");
                     var button=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","修改").attr("data-toggle","modal").attr("data-target","#myModal1").attr("onclick","setModal("+content.prod_id+")").append($("<i></i>").addClass("glyphicon glyphicon  glyphicon-pencil"));
+                    var button2=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","删除").attr("data-toggle","modal").attr("data-target","#myModa2").attr("onclick","setDelete("+content.prod_id+")").append($("<i></i>").addClass("glyphicon glyphicon-trash"));
                     var td1=$("<td></td>").append(content.prod_name);
                     var td2=$("<td></td>").append(content.prod_desc);
-                    var td3=$("<td></td>").append(button);
+                    var td3=$("<td></td>").append(button).append("  ").append(button2);
                     tr.append(td1).append(td2).append(td3);
                     $("#tableinsert").append(tr);
                 });
@@ -171,14 +172,28 @@
                 $.each(data.prods,function(index,content){
                     var tr=$("<tr></tr>");
                     var button=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","修改").attr("data-toggle","modal").attr("data-target","#myModal1").attr("onclick","setModal("+content.prod_id+")").append($("<i></i>").addClass("glyphicon glyphicon  glyphicon-pencil"));
+                    var button2=$("<button></button>").addClass("btn btn-default").attr("type","button").attr("name","toggle").attr("title","删除").attr("data-toggle","modal").attr("data-target","#myModa2").attr("onclick","setDelete("+content.prod_id+")").append($("<i></i>").addClass("glyphicon glyphicon-trash"));
                     var td1=$("<td></td>").append(content.prod_name);
                     var td2=$("<td></td>").append(content.prod_desc);
-                    var td3=$("<td></td>").append(button);
+                    var td3=$("<td></td>").append(button).append("  ").append(button2);
                     tr.append(td1).append(td2).append(td3);
                     $("#tableinsert").append(tr);
                 });
             }
         });
+    }
+    function deleteModal(prod_id) {
+        $.ajax({
+            type:"POST",
+            url:"${pageContext.request.contextPath }/modal/deleteModal.action?prod_id="+prod_id,
+            contentType:'application/json;charset=utf-8',
+            success:function(data){
+                queryModalfiyLimit($("#nowpage").val());
+            }
+        });
+    }
+    function setDelete(prod_id) {
+        $("#deletebutton").attr("onclick","deleteModal("+prod_id+")")
     }
 </script>
 </head>
@@ -301,8 +316,35 @@
   <!--/.row--> 
   
 </div>
-<!--/.main--> 
+<!--/.main-->
+<div class="modal fade" id="myModa2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <input type="hidden" id="user_id">
+                <input type="hidden" id="user_falge">
+                <h4  id="myModalLabel2" style="text-align: center;">
+                    你确认删除该模板吗？
+                </h4>
+            </div>
 
+            <div class="modal-footer">
+                <h5  id="myModalLabel3" style="text-align: center;color:red ">
+                    删除将后无法恢复
+                </h5>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+                <button id="deletebutton" type="button" class="btn btn-primary" data-dismiss="modal" >
+                    确认
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog" >
@@ -424,7 +466,7 @@
 
     </select></div>
 	
-	<center><button type="button" class="btn btn-default" data-dismiss="modal" onclick="updateModal()">提交</button></center>
+	<center><button  type="button" class="btn btn-default" data-dismiss="modal" onclick="updateModal()">提交</button></center>
 		
 		
 	</form>

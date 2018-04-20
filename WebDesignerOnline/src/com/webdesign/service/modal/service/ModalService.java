@@ -26,4 +26,6 @@ public interface ModalService {
     public void insertModal(Prod prod);
     //通过名字搜索模板
     public int seachModalByName(KeywordsAndNowPage keywordsAndNowPage);
+    //删除模板
+    public void deleteModal(int prod_id);
 }

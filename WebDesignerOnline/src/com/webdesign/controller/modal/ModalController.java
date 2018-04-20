@@ -5,6 +5,7 @@ import com.webdesign.bean.modal.Prod;
 import com.webdesign.bean.modal.extend.ProdAndAllPage;
 import com.webdesign.bean.modal.extend.ProdAndClassfiy;
 import com.webdesign.service.modal.service.ModalService;
+import com.webdesign.tools.DeleteFiles;
 import com.webdesign.tools.ZipUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +63,7 @@ public class ModalController {
         prodAndAllPage.setAllpage(allpage);
         return prodAndAllPage;
     }
-    //用过ID查询分类
+    //用过ID查询模板
     @RequestMapping("queryModalById")
     public @ResponseBody ProdAndClassfiy queryModalById(int prod_id){
         ProdAndClassfiy prodAndClassfiy=new ProdAndClassfiy();
@@ -163,5 +164,26 @@ public class ModalController {
             modalService.insertModal(prod);
         }
 
+    }
+    //删除模板
+    @RequestMapping("deleteModal")
+    public @ResponseBody void deleteModal(int prod_id,HttpSession session){
+        String path = session.getServletContext().getRealPath("/document/resource/prod/images");
+        String path2 = session.getServletContext().getRealPath("/document/resource/prod/src");
+        String realName="";
+        String realName2="";
+        realName = realName+prod_id+".jpg";
+        realName2 = realName2+prod_id;
+        String realFilePath = path+File.separator+realName;
+        String realFilePath2 = path2+File.separator+realName2;
+        System.out.println(realFilePath);
+        System.out.println(realFilePath2);
+        File file1=new File(realFilePath);
+        File file2=new File(realFilePath2);
+        file1.delete();
+        DeleteFiles deleteFiles=new DeleteFiles();
+        deleteFiles.delAllFile(realFilePath2);
+        file2.delete();
+        modalService.deleteModal(prod_id);
     }
 }
