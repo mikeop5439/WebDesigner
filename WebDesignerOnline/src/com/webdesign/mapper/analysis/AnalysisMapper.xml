@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件中编写sql语句 -->
+<!-- xml 可以作为配置文件。 -->
+<mapper namespace="com.webdesign.mapper.analysis.AnalysisMapper">
+    <!-- 流量分析封装 -->
+    <resultMap type="dateAndCount" id="dateAndCount">
+        <result column="count" property="count"/>
+        <result column="date" property="user_accesstime"/>
+    </resultMap>
+    <!--用户登录记录-->
+    <insert id="loginRmark" parameterType="userIdAndTime">
+        insert into date_traffic(user_id,user_accesstime) values (#{user_id},#{user_accesstime})
+    </insert>
+    <!--查询用户id-->
+    <select id="queryUserId" parameterType="String" resultType="int">
+        select user_id from user where user_name=#{user_name}
+    </select>
+    <!-- 查询每日的访问数 -->
+    <select id="queryDateTraffic" resultMap="dateAndCount">
+        select count(*) count,user_accesstime date
+        FROM date_traffic
+        GROUP BY user_accesstime
+    </select>
+</mapper>

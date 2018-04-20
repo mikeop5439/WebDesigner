@@ -1,7 +1,9 @@
 package com.webdesign.controller.users;
 
+import com.webdesign.bean.analysis.extend.UserIdAndTime;
 import com.webdesign.bean.users.User;
 import com.webdesign.bean.users.extend.UsersRegisteredClass;
+import com.webdesign.service.analysis.service.AnalysisService;
 import com.webdesign.service.users.service.UserLoginAndRegisteredService;
 import com.webdesign.tools.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import java.util.List;
 public class UsersController {
     @Autowired
     private UserLoginAndRegisteredService userLoginAndRegisteredService;
+    @Autowired
+    private AnalysisService analysisService;
 
     //用户注册
     @RequestMapping("registered")
@@ -84,10 +88,12 @@ public class UsersController {
             return "redirect:/fe/login.jsp";
         }else{
             session.setAttribute("username",user.getUser_name());
-            /*date_traffic.setUser_id(user2.getUser_id());
-                            date_traffic.setUser_accesstime(logindate);
+            UserIdAndTime userIdAndTime=new UserIdAndTime();
+            userIdAndTime.setUser_id(analysisService.queryUserId(user.getUser_name()));
+            Date date=new Date();
+            userIdAndTime.setUser_accesstime(date);
+            analysisService.loginRmark(userIdAndTime);
 
-                            userListService.insertuserlogincount(date_traffic);*/
             return "redirect:/index.jsp";
         }
 
