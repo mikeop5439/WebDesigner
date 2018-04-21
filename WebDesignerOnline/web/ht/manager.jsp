@@ -105,7 +105,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><span>米拉</span>后台管理系统</a>
+				<a class="navbar-brand" href="#"><span>MiLaDesigner</span>系统管理平台</a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${sessionScope.username} <span class="caret"></span></a>
@@ -127,10 +127,10 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="classfiy.jsp"><span class="glyphicon glyphicon-dashboard"></span> 分类管理</a></li>
+			<li ><a href="classfiy.jsp"><span class="glyphicon glyphicon-dashboard"></span> 分类管理</a></li>
 			<li><a href="modal.jsp"><span class="glyphicon glyphicon-th"></span> 资源管理</a></li>
-			<li class="active"><a href="manager.jsp"><span class="glyphicon glyphicon-list-alt"></span> 权限管理</a></li>
-			<li class="parent">
+			<li id="manager_jsp" class="active"><a href="manager.jsp"><span class="glyphicon glyphicon-list-alt"></span> 权限管理</a></li>
+			<li id="analysis_jsp" class="parent">
 				<a href="#">
 					<span class="glyphicon glyphicon-stats"></span> 数据分析 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
 				</a>
@@ -151,7 +151,7 @@
 			<li role="presentation" class="divider"></li>
 			<li><a href="${pageContext.request.contextPath}/index.jsp"><span class="glyphicon glyphicon-cloud"></span>用户制作页面</a></li>
 		</ul>
-		<div class="attribution">Template by <a href="http://www.medialoot.com/item/lumino-admin-bootstrap-template/">Medialoot</a></div>
+		<div class="attribution">Template by 黄鼎运、曾盈</div>
 	</div><!--/.sidebar-->
 	
 	
@@ -161,14 +161,14 @@
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+				<li><a href="index.jsp"><span class="glyphicon glyphicon-home"></span></a></li>
 				<li class="active">权限管理</li>
 			</ol>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Tables</h1>
+				<h1 class="page-header">权限管理</h1>
 			</div>
 		</div><!--/.row-->
 				
@@ -176,7 +176,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">权限管理</div>
+					<div class="panel-heading">管理用户权限</div>
 					<div class="panel-body">
 						<table data-toggle="table" data-url="tables/data1.json"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						    <thead>
@@ -258,7 +258,12 @@
 		$(window).on('resize', function () {
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
-	</script>	
+	</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+	})
+</script>
 </body>
 
 </html>

@@ -18,8 +18,11 @@ public interface UserLoginAndRegisteredService {
      public int queryUserLogin(User user);
      //修改用户权限
      public void setManager(int user_id);
+     //退出登录
      public void nosetManager(int user_id);
      //查询用户
      public List<User> queryUserByName(String user_name);
+     //查询用户权限
+     public int queryUserFlag(String user_name);
 
 }

@@ -40,10 +40,12 @@
 					<span class="menu-icon"> </span>
 					<ul>
 						<li><a href="#services" class="scroll">首页</a></li>
-						<li><a href="#price" class="scroll">模板</a></li>
+						<li class="login" style="display: none"><a href="#price" class="scroll">模板</a></li>
 						<li><a href="#projects" class="scroll">关于</a></li>
-						<li><a href="fe/login.jsp" >登录</a></li>
-						<li><a href="#contact" class="scroll">Contact</a></li>
+						<li class="unhtlogin"><a href="#contact" class="scroll">Contact</a></li>
+						<li class="unlogin"><a href="fe/login.jsp" >登录</a></li>
+						<li class="htlogin" style="display: none"><a href="ht/index.jsp" >系统管理平台</a></li>
+						<li class="login" style="display: none"><a href="${pageContext.request.contextPath }/users/quitUser.action" >退出登录</a></li>
 						<div class="clearfix"> </div>
 					</ul>
 				</div>
@@ -532,14 +534,14 @@
 						<p><a href="#totop" class="scroll">Back to top<span> </span></a></p>
 						<script type="text/javascript">
 									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
+                                        if("<%=session.getAttribute("username")%>"!="null" ){
+                                            $(".login").css("display","");
+                                            $(".unlogin").css("display","none");
+                                            if("<%=session.getAttribute("userflag")%>"!="0" ){
+                                                $(".htlogin").css("display","");
+                                                $(".unhtlogin").css("display","none");
+                                            }
+                                        }
 										
 										$().UItoTop({ easingType: 'easeOutQuart' });
 										

@@ -17,13 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:com/config/applicationContext.xml"})
 public class AddTest {
     @Autowired
-    private ModalService modalService;
+    private UserLoginAndRegisteredService modalService;
     @Test
     public void test1(){
-
-      /*  ZipUtil zipUtil=new ZipUtil();
-        zipUtil.unZip();
-*/
+        System.out.println("!!!!!!!!!!!"+modalService.queryUserFlag("mikeop5439"));
     }
 
 }

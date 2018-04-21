@@ -34,7 +34,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><span>米拉</span>后台管理系统</a>
+				<a class="navbar-brand" href="#"><span>MiLaDesigner</span>系统管理平台</a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${sessionScope.username} <span class="caret"></span></a>
@@ -80,7 +80,7 @@
 			<li role="presentation" class="divider"></li>
 			<li><a href="${pageContext.request.contextPath}/index.jsp"><span class="glyphicon glyphicon-cloud"></span>用户制作页面</a></li>
 		</ul>
-		<div class="attribution">Template by <a href="http://www.medialoot.com/item/lumino-admin-bootstrap-template/">Medialoot</a></div>
+		<div class="attribution">Template by 黄鼎运、曾盈</div>
 	</div><!--/.sidebar-->
 	
 	
@@ -90,7 +90,7 @@
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+				<li><a href="index.jsp"><span class="glyphicon glyphicon-home"></span></a></li>
 				<li class="active">访问流量</li>
 			</ol>
 		</div><!--/.row-->

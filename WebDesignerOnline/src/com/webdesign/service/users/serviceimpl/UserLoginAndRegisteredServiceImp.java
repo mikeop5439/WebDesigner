@@ -46,4 +46,9 @@ public class UserLoginAndRegisteredServiceImp implements UserLoginAndRegisteredS
     public List<User> queryUserByName(String user_name) {
         return userLoginAndRegistered.queryUserByName(user_name);
     }
+
+    @Override
+    public int queryUserFlag(String user_name) {
+        return userLoginAndRegistered.queryUserFlag(user_name);
+    }
 }

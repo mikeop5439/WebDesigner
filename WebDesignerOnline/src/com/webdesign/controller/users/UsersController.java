@@ -38,7 +38,6 @@ public class UsersController {
         String user_register;
         UsersRegisteredClass usersRegisteredClass=new UsersRegisteredClass();
         user_name = request.getParameter("user_name");
-        System.out.println("1111111111111"+user_name);
         usersRegisteredClass.setUser_name(user_name);
         user_tele = request.getParameter("user_tele");
         usersRegisteredClass.setUser_tele(user_tele);
@@ -69,14 +68,6 @@ public class UsersController {
                                HttpServletResponse response,
                                User user
     ) throws ParseException {
-        //登陆记录
-        /*Date_traffic date_traffic = new Date_traffic();
-
-        Date nowTime = new Date(System.currentTimeMillis());
-        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        String retStrFormatNowDate = sdFormatter.format(nowTime);
-        Date logindate = sdFormatter.parse(retStrFormatNowDate);*/
-
         //登陆
         HttpSession session = request.getSession();
         Md5 md5t=new Md5();
@@ -88,12 +79,12 @@ public class UsersController {
             return "redirect:/fe/login.jsp";
         }else{
             session.setAttribute("username",user.getUser_name());
+            session.setAttribute("userflag",userLoginAndRegisteredService.queryUserFlag(user.getUser_name()));
             UserIdAndTime userIdAndTime=new UserIdAndTime();
             userIdAndTime.setUser_id(analysisService.queryUserId(user.getUser_name()));
             Date date=new Date();
             userIdAndTime.setUser_accesstime(date);
             analysisService.loginRmark(userIdAndTime);
-
             return "redirect:/index.jsp";
         }
 
@@ -105,6 +96,7 @@ public class UsersController {
     public String quitUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.removeAttribute("username");
+        session.removeAttribute("userflag");
         return "redirect:/index.jsp";
     }
 

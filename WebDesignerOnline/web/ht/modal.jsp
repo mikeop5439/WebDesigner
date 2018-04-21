@@ -203,7 +203,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="#"><span>米拉</span>后台管理系统</a>
+        <a class="navbar-brand" href="#"><span>MiLaDesigner</span>系统管理平台</a>
       <ul class="user-menu">
         <li class="dropdown pull-right"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> ${sessionScope.username} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -246,13 +246,13 @@
         <li role="presentation" class="divider"></li>
         <li><a href="${pageContext.request.contextPath}/index.jsp"><span class="glyphicon glyphicon-cloud"></span>用户制作页面</a></li>
     </ul>
-    <div class="attribution">Template by <a href="http://www.medialoot.com/item/lumino-admin-bootstrap-template/">Medialoot</a></div>
+    <div class="attribution">Template by 黄鼎运、曾盈</div>
 </div><!--/.sidebar-->
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <div class="row">
     <ol class="breadcrumb">
-      <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+      <li><a href="index.jsp"><span class="glyphicon glyphicon-home"></span></a></li>
       <li class="active">资源管理</li>
     </ol>
   </div>
@@ -260,7 +260,7 @@
   
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Tables</h1>
+      <h1 class="page-header">资源管理</h1>
     </div>
   </div>
   <!--/.row     <input id="seachinput" class="form-control" type="text" placeholder="Search">    <button class="btn btn-default" type="button" name="refresh" title="Refresh" onclick="seachuser()"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button>
@@ -269,7 +269,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-default">
-        <div class="panel-heading">资源管理</div>
+        <div class="panel-heading">管理资源模板</div>
         <div class="panel-body">
           <div class="fixed-table-toolbar">
             <div class="columns btn-group pull-right">
@@ -510,6 +510,11 @@
     <script type="text/javascript">
         $(document).ready(function(){
             queryModalfiyLimit(1);
+            if("<%=session.getAttribute("userflag")%>"==1 ){
+
+                $("#manager_jsp").css("display","none");
+                $("#analysis_jsp").css("display","none");
+            }
         })
     </script>
 </body>

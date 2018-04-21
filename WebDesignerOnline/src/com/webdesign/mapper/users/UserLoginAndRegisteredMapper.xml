@@ -32,4 +32,8 @@
     <select id="queryUserByName" parameterType="String" resultType="user">
         select * from user u where u.user_name=#{user_name}
     </select>
+    <!--查询用户权限-->
+    <select id="queryUserFlag" parameterType="String" resultType="int">
+        select user_flage from user u where u.user_name=#{user_name}
+    </select>
 </mapper>
