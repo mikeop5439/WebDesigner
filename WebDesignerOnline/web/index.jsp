@@ -40,7 +40,7 @@
 					<span class="menu-icon"> </span>
 					<ul>
 						<li><a href="#services" class="scroll">首页</a></li>
-						<li class="login" style="display: none"><a href="#price" class="scroll">模板</a></li>
+						<li class="login" style="display: none"><a href="fe/gallery.jsp" >模板</a></li>
 						<li><a href="#projects" class="scroll">关于</a></li>
 						<li class="unhtlogin"><a href="#contact" class="scroll">Contact</a></li>
 						<li class="unlogin"><a href="fe/login.jsp" >登录</a></li>
