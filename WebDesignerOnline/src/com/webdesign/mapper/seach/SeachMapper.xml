@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件中编写sql语句 -->
+<!-- xml 可以作为配置文件。 -->
+<mapper namespace="com.webdesign.mapper.seach.SeachMapper">
+    <!--搜索分类-->
+    <select id="seachClassfiy" resultType="prod_spec">
+        select * from prod_spec ps where ps.spec_status_cd=12;
+    </select>
+    <!--查询分类下的模板-->
+    <select id="queryModalByClassfiy" parameterType="classfiyAndNowPage" resultType="prod">
+        select p.* from prod p,prod_spec ps where p.prod_status_cd=12 and p.spec_id=#{spec_id} and p.spec_id=ps.spec_id and ps.spec_status_cd=12 limit #{startindex},8;
+    </select>
+    <!--查询分类下的模板总数-->
+    <select id="queryModalByClassfiyCount" parameterType="classfiyAndNowPage" resultType="int">
+        select count(*) from prod p,prod_spec ps where p.prod_status_cd=12 and p.spec_id=#{spec_id} and p.spec_id=ps.spec_id and ps.spec_status_cd=12 ;
+    </select>
+    <!--模板使用记录-->
+    <insert id="insertUserProd" parameterType="user_prod">
+        insert into user_prod(user_id,prod_id,used_date) values (#{user_id},#{prod_id},#{used_date})
+    </insert>
+</mapper>

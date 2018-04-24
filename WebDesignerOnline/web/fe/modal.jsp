@@ -7,7 +7,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Gallery</title>
+	<base target="_blank" />
+<title>Modal</title>
 <link href="${pageContext.request.contextPath}/fe/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- Custom Theme files -->
@@ -42,55 +43,82 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript">
-	function queryAllClassfiy() {
+    function setpage(allpage,nowpage) {
+        var i=1;
+        var page_id="nowpage";
+        var page_pre=nowpage-1;
+        var page_next=nowpage+1;
+        $("#nowpage").val(nowpage);
+        $("#allpage").val(allpage);
+        $("#pageUl").empty();
+        $("#pageUl").append("<li class='page-first'><a href='javascript:queryModalByClassfiy(1)'>&lt;&lt;</a></li>");
+        $("#pageUl").append("<li class='page-pre '><a href='javascript:queryModalByClassfiy("+page_pre+")'>&lt;</a></li>");
+        for(i;i<=allpage;i++){
+            page_id="nowpage";
+            page_id=page_id+i;
+            $("#pageUl").append("<li id='"+page_id+"' class='page-number '><a href='javascript:queryModalByClassfiy("+i+")'>"+i+"</a></li>");
+        }
+        $("#pageUl").append("<li class='page-next '><a href='javascript:queryModalByClassfiy("+page_next+")'>&gt;</a></li>");
+        $("#pageUl").append("<li class='page-last '><a href='javascript:queryModalByClassfiy("+allpage+")'>&gt;&gt;</a></li>");
+        page_id="nowpage"+nowpage;
+        var id="#"+page_id;
+        $("ul.pageUl li").removeClass("active");
+        $(id).addClass("active");
+    }
+    function queryModalByClassfiy(nowpage) {
+        var spec_id=GetQueryString("spec_id");
+        var params = '{"spec_id":"'+spec_id+'","now_page":"'+nowpage+'"}';
         $.ajax({
             type:"POST",
-            url:"${pageContext.request.contextPath }/seach/queryAllClassfiy.action",
+            url:"${pageContext.request.contextPath }/seach/queryModalByClassfiy.action",
+            data:params,
             contentType:'application/json;charset=utf-8',
             success:function(data){
+                setpage(data.allpage,nowpage);
                 $("#div_classfiy").empty();
-                if(data.length>4){
+
+               if((data.prods).length>4){
                     var diva=$("<div></div>").addClass("entertain_box wow fadeInLeft").attr("data-wow-delay","0.4s");
                     var divb=$("<div></div>").addClass("entertain_box wow fadeInLeft").attr("data-wow-delay","0.4s");
 
-                    $.each(data,function(index,content){
+                    $.each(data.prods,function(index,content){
                         if (index<=3) {
                             var div1=$("<div></div>").addClass("col-md-3 grid_box");
                             var div2=$("<div></div>").addClass("grid_box2");
-                            var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}/seach/toModal.action?spec_id="+content.spec_id).addClass("swipebox").attr("title","Image Title").attr("rel","external");
-                            var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}/seach/toModal.action?spec_id="+content.spec_id).append(content.spec_name).attr("rel","external");
-                            var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.spec_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
+                            var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                            var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).append(content.prod_name).attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                            var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.prod_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
                             var span=$("<span></span>").addClass("zoom-icon");
                             var h=$("<h4></h4>");
-                            var p=$("<p></p>").append(content.spec_desc);
+                            var p=$("<p></p>").append(content.prod_desc);
                             div1.append(a1.append(img).append(span)).append(div2.append(h.append(a2)).append(p));
                             diva.append(div1);
                         }else {
                             var div1=$("<div></div>").addClass("col-md-3 grid_box");
                             var div2=$("<div></div>").addClass("grid_box2");
-                            var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}/seach/toModal.action?spec_id="+content.spec_id).addClass("swipebox").attr("title","Image Title").attr("rel","external");
-                            var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}/seach/toModal.action?spec_id="+content.spec_id).append(content.spec_name).attr("rel","external");
-                            var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.spec_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
+                            var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                            var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).append(content.prod_name).attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                            var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.prod_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
                             var span=$("<span></span>").addClass("zoom-icon");
                             var h=$("<h4></h4>");
-                            var p=$("<p></p>").append(content.spec_desc);
+                            var p=$("<p></p>").append(content.prod_desc);
                             div1.append(a1.append(img).append(span)).append(div2.append(h.append(a2)).append(p));
                             divb.append(div1);
                         }
                     });
                     var diveclear= $("<div></div>").addClass("clearfix");
                     $("#div_classfiy").append(diva.append(diveclear)).append(divb);
-				}else {
+                }else {
                     var div=$("<div></div>").addClass("entertain_box wow fadeInLeft").attr("data-wow-delay","0.4s");
-                    $.each(data,function(index,content){
+                    $.each(data.prods,function(index,content){
                         var div1=$("<div></div>").addClass("col-md-3 grid_box");
                         var div2=$("<div></div>").addClass("grid_box2");
-                        var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}/seach/toModal.action?spec_id="+content.spec_id).addClass("swipebox").attr("title","Image Title").attr("rel","external");
-                        var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}/seach/toModal.action?spec_id="+content.spec_id).append(content.spec_name).attr("rel","external");
-                        var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.spec_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
+                        var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                        var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).append(content.prod_name).attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                        var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.prod_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
                         var span=$("<span></span>").addClass("zoom-icon");
                         var h=$("<h4></h4>");
-                        var p=$("<p></p>").append(content.spec_desc);
+                        var p=$("<p></p>").append(content.prod_desc);
                         div1.append(a1.append(img).append(span)).append(div2.append(h.append(a2)).append(p));
                         div.append(div1);
                         $("#div_classfiy").append(div);
@@ -100,6 +128,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     }
 </script>
+	<script>
+		function insertUserProd(prod_id) {
+		    var user_name='<%=session.getAttribute("username")%>';
+            var params = '{"user_name":"'+user_name+'","prod_id":"'+prod_id+'"}';
+            $.ajax({
+                type:"POST",
+                url:"${pageContext.request.contextPath }/seach/insertUserProd.action",
+                data:params,
+                contentType:'application/json;charset=utf-8',
+                success:function(data){
+                }
+            });
+        }
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+	</script>
     </head>
 <body>
 	<!-- header -->
@@ -135,7 +183,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 			<!-- header-info -->
 				<div class="header-info text-center">
-					<h2>第一步：选择分类</h2>
+					<h2>第二步：选择模板</h2>
 					<span> </span>
 					<h1>选择一款中意的模版： 1、选择分类   2、选择模板  3、修改模板</h1>
 					<a href="#intro"  class="scroll"><label class="downarrow"> </label></a>
@@ -148,70 +196,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
    
    <div id="intro" class="living_middle">
    	  <div id="div_classfiy" class="container">
-   	    <%--<div class="entertain_box wow fadeInLeft" data-wow-delay="0.4s">
-		   <div class="col-md-3 grid_box">
-		   	   <a href="images/p1.jpg" class="swipebox"  title="Image Title"> <img src="images/p1.jpg" class="img-responsive" alt=""><span class="zoom-icon"></span> </a>
-		   	  <div class="grid_box2">
-			   <h4><a href="#">企业/公司/机构</a></h4>
-			   <p>voluptatem sequi</p>
-	          </div>
-		   </div>
-		   <div class="col-md-3 grid_box">
-		   	   <a href="images/p2.jpg" class="swipebox"  title="Image Title"> <img src="images/p2.jpg" class="img-responsive" alt=""><span class="zoom-icon"></span> </a>
-		   	  <div class="grid_box2">
-			   <h4><a href="#">个人</a></h4>
-			   <p>voluptatem sequi</p>
-	          </div>
-		   </div>
-		   <div class="col-md-3 grid_box">
-		   	   <a href="images/p3.jpg" class="swipebox"  title="Image Title"> <img src="images/p3.jpg" class="img-responsive" alt=""><span class="zoom-icon"></span> </a>
-		   	  <div class="grid_box2">
-			   <h4><a href="#"> 在线商城</a></h4>
-			   <p>voluptatem sequi</p>
-	          </div>
-		   </div>
-		   <div class="col-md-3 grid_box">
-		   	   <a href="images/p4.jpg" class="swipebox"  title="Image Title"> <img src="images/p4.jpg" class="img-responsive" alt=""><span class="zoom-icon"></span> </a>
-		   	  <div class="grid_box2">
-			   <h4><a href="#">一页式网站</a></h4>
-			   <p>voluptatem sequi</p>
-	          </div>
-		   </div>
-		   <div class="clearfix"> </div>
-		 </div>
-		 <div class="entertain_box1 wow fadeInRight" data-wow-delay="0.4s">
-		   <div class="col-md-3 grid_box">
-		   	   <a href="images/p5.jpg" class="swipebox"  title="Image Title"> <img src="images/p5.jpg" class="img-responsive" alt=""><span class="zoom-icon"></span> </a>
-		   	  <div class="grid_box2">
-			   <h4><a href="#">设计风格</a></h4>
-			   <p>voluptatem sequi</p>
-	          </div>
-		   </div>
-		   <div class="col-md-3 grid_box">
-		   	   <a href="images/p6.jpg" class="swipebox"  title="Image Title"> <img src="images/p6.jpg" class="img-responsive" alt=""><span class="zoom-icon"></span> </a>
-		   	  <div class="grid_box2">
-			   <h4><a href="#">Hotel</a></h4>
-			   <p>voluptatem sequi</p>
-	          </div>
-		   </div>
-		   <div class="col-md-3 grid_box">
-		   	   <a href="images/p7.jpg" class="swipebox"  title="Image Title"> <img src="images/p7.jpg" class="img-responsive" alt=""><span class="zoom-icon"></span> </a>
-		   	  <div class="grid_box2">
-			   <h4><a href="#">Hotel</a></h4>
-			   <p> voluptatem sequi</p>
-	          </div>
-		   </div>
-		   <div class="col-md-3 grid_box">
-		   	   <a href="images/p8.jpg" class="swipebox"  title="Image Title"> <img src="images/p8.jpg" class="img-responsive" alt=""><span class="zoom-icon"></span> </a>
-		   	  <div class="grid_box2">
-			   <h4><a href="#">Hotel</a></h4>
-			   <p>voluptatem sequi</p>
-	          </div>
-		   </div>
-		   <div class="clearfix"> </div>
-		 </div>
-     </div>--%>
-	  </div>
+
+		 </div>	
+     </div>
+       <div  style="float: none;  display: block;  margin-left: auto;  margin-right: auto; text-align: center;  " >
+              <input type="hidden" id="nowpage" value="1">
+              <input type="hidden" id="allpage" value="1">
+            <ul id="pageUl" class="pagination">
+              <li class="page-first "><a href="javascript:void(0)">&lt;&lt;</a></li>
+              <li class="page-pre "><a href="javascript:void(0)">&lt;</a></li>
+              <li class="page-number active "><a href="javascript:void(0)">1</a></li>
+                <li class="page-number  "><a href="javascript:void(0)">2</a></li>
+                <li class="page-next "><a href="javascript:void(0)">&gt;</a></li>
+              <li class="page-last "><a href="javascript:void(0)">&gt;&gt;</a></li>
+            </ul>
+          </div>
    </div>
    
    <!-- contact -->
@@ -278,7 +277,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                 $(".htlogin").css("display","");
                                                 $(".unhtlogin").css("display","none");
                                             }
-                                            queryAllClassfiy();
+                                             queryModalByClassfiy(1);
                                         }
 										
 									
