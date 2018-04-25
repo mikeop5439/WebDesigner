@@ -34,6 +34,10 @@
 		<!-- container -->
 			<!-- header -->
 			<div id="totop" class="header">
+				<video autoplay muted volume="0" poster="http://ccdn.goodq.top/caches/2d2bd038d43e773a454cbb4ae76768fb/aHR0cDovL3d3dy5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMDMvZGQ4ZmRhYzcyOTA0ZTBlZmJjYzRlNzM4ZmJiYTMyOWEuanBn.jpg" loop style="width: 100%; height: 100%;object-fit:cover;object-position:center center" class="section-background-video">
+					<source type="video/webm" src="http://ccdn.goodq.top/caches/2d2bd038d43e773a454cbb4ae76768fb/aHR0cDovL3d3dy5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMDMvMTIzNC53ZWJt.webm">
+					<source type="video/mp4" src="http://ccdn.goodq.top/caches/2d2bd038d43e773a454cbb4ae76768fb/aHR0cDovL3d3dy5xaWZlaXllLmNvbS9xZnktY29udGVudC91cGxvYWRzLzIwMTYvMDMvYXBwbGVfc2luZ19jaGlsZC5tcDQ_p_p100_p_3D.mp4">
+				</video>
 				<div class="container">
 				<!-- menu -->
 				<div class="menu">
@@ -42,7 +46,7 @@
 						<li><a href="#services" class="scroll">首页</a></li>
 						<li class="login" style="display: none"><a href="fe/gallery.jsp" >模板</a></li>
 						<li><a href="#projects" class="scroll">关于</a></li>
-						<li class="unhtlogin"><a href="#contact" class="scroll">Contact</a></li>
+						<li class="unhtlogin"><a href="#contact" class="scroll">联系我们</a></li>
 						<li class="unlogin"><a href="fe/login.jsp" >登录</a></li>
 						<li class="htlogin" style="display: none"><a href="ht/index.jsp" >系统管理平台</a></li>
 						<li class="login" style="display: none"><a href="${pageContext.request.contextPath }/users/quitUser.action" >退出登录</a></li>
@@ -94,7 +98,7 @@
 					<script src="${pageContext.request.contextPath}/fe/js/jquery.magnific-popup.js" type="text/javascript"></script>
 					<!---//pop-up-box---->
 				<div id="small-dialog" class="mfp-hide">
-					<iframe src="//player.vimeo.com/video/38584262"> </iframe>
+					<iframe > </iframe>
 				</div>
 				 <script>
 						$(document).ready(function() {
