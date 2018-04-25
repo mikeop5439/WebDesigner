@@ -1,6 +1,7 @@
 package com.webdesign.controller.analysis;
 
 import com.webdesign.bean.analysis.extend.DateAndCount;
+import com.webdesign.bean.analysis.extend.ProdsNameAndCount;
 import com.webdesign.service.analysis.service.AnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,5 +20,12 @@ public class AnalysisConroller {
     public @ResponseBody
     List<DateAndCount> dateAnalysis(){
         return  analysisService.queryDateTraffic();
+    }
+    @RequestMapping("saleAnalysis")
+    public @ResponseBody ProdsNameAndCount saleAnalysis(){
+        ProdsNameAndCount prodsNameAndCount=new ProdsNameAndCount();
+        prodsNameAndCount.setProdsAndCounts(analysisService.queryTopModals());
+        prodsNameAndCount.setClassfiyAndCounts(analysisService.queryTopClassfiy());
+        return  prodsNameAndCount;
     }
 }

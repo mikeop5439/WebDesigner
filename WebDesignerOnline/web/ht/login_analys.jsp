@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lumino - Tables</title>
+<title>流量分析</title>
 
 <link href="${pageContext.request.contextPath}/ht/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/ht/css/datepicker3.css" rel="stylesheet">

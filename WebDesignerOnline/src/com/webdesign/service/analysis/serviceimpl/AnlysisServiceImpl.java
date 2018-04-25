@@ -1,6 +1,7 @@
 package com.webdesign.service.analysis.serviceimpl;
 
 import com.webdesign.bean.analysis.extend.DateAndCount;
+import com.webdesign.bean.analysis.extend.ProdsAndCount;
 import com.webdesign.bean.analysis.extend.UserIdAndTime;
 import com.webdesign.mapper.analysis.AnalysisMapper;
 import com.webdesign.service.analysis.service.AnalysisService;
@@ -27,5 +28,15 @@ public class AnlysisServiceImpl implements AnalysisService {
     @Override
     public List<DateAndCount> queryDateTraffic() {
         return analysisMapper.queryDateTraffic();
+    }
+
+    @Override
+    public List<ProdsAndCount> queryTopModals() {
+        return analysisMapper.queryTopModals();
+    }
+
+    @Override
+    public List<ProdsAndCount> queryTopClassfiy() {
+        return analysisMapper.queryTopClassfiy();
     }
 }

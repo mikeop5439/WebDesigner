@@ -10,6 +10,11 @@
         <result column="count" property="count"/>
         <result column="date" property="user_accesstime"/>
     </resultMap>
+    <!-- 使用概况封装 -->
+    <resultMap type="prodsAndCount" id="useAbout">
+        <result column="name" property="prods_name"/>
+        <result column="count" property="count"/>
+    </resultMap>
     <!--用户登录记录-->
     <insert id="loginRmark" parameterType="userIdAndTime">
         insert into date_traffic(user_id,user_accesstime) values (#{user_id},#{user_accesstime})
@@ -23,5 +28,13 @@
         select count(*) count,user_accesstime date
         FROM date_traffic
         GROUP BY user_accesstime
+    </select>
+    <!-- 查询使用量前十的模板 -->
+    <select id="queryTopModals" resultMap="useAbout">
+    SELECT COUNT(*) count,p.prod_name name from user_prod up,prod p where up.prod_id=p.prod_id GROUP BY up.prod_id LIMIT 0,10
+    </select>
+    <!-- 查询使用量前十的分类 -->
+    <select id="queryTopClassfiy" resultMap="useAbout">
+    SELECT COUNT(*) count ,ps.spec_name name from user_prod up,prod p,prod_spec ps where up.prod_id=p.prod_id and p.spec_id=ps.spec_id GROUP BY up.prod_id LIMIT 0,10
     </select>
 </mapper>

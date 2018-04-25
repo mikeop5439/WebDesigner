@@ -1,6 +1,7 @@
 package com.webdesign.mapper.analysis;
 
 import com.webdesign.bean.analysis.extend.DateAndCount;
+import com.webdesign.bean.analysis.extend.ProdsAndCount;
 import com.webdesign.bean.analysis.extend.UserIdAndTime;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface AnalysisMapper {
     public int queryUserId(String user_name);
     //查询每日的访问数
     public List<DateAndCount> queryDateTraffic();
+    //查询使用量前十的模板
+    public List<ProdsAndCount> queryTopModals();
+    //查询使用量前十的分类
+    public List<ProdsAndCount> queryTopClassfiy();
 }
