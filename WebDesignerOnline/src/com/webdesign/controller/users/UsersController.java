@@ -80,6 +80,7 @@ public class UsersController {
         }else{
             session.setAttribute("username",user.getUser_name());
             session.setAttribute("userflag",userLoginAndRegisteredService.queryUserFlag(user.getUser_name()));
+            session.setAttribute("user_id",analysisService.queryUserId(user.getUser_name()));
             UserIdAndTime userIdAndTime=new UserIdAndTime();
             userIdAndTime.setUser_id(analysisService.queryUserId(user.getUser_name()));
             Date date=new Date();

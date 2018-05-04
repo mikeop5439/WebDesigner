@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件中编写sql语句 -->
+<!-- xml 可以作为配置文件。 -->
+<mapper namespace="com.webdesign.mapper.recommend.RecommendMapper">
+    <!--查询用户使用记录-->
+    <select id="queryUserProd" resultType="user_prod">
+    select * from user_prod
+    </select>
+    <!--插入推荐信息-->
+    <insert id="insertRecommend" parameterType="useRecommend">
+        insert into recommend(user_id,prod_id,value) values (#{user_id},#{prod_id},#{value})
+    </insert>
+    <!--清表-->
+    <delete id="deleteRecommend">
+        delete from recommend
+    </delete>
+    <!--根据用户查询推荐模板-->
+    <select id="queryRecommendByUserId" resultType="int" parameterType="int">
+    select r.prod_id from recommend r where user_id=#{user_id}
+    </select>
+    <!--根据Prod_id查询模板-->
+    <select id="queryProdById" resultType="prod" >
+        select * from prod where prod_id in
+        <foreach item="prod_id" index="index" collection="list" open="(" separator="," close=")">
+            #{prod_id}
+        </foreach>
+    </select>
+    <!--查询前四模板-->
+    <select id="queryProd4" resultType="prod" >
+        select * from prod limit 0,4
+    </select>
+</mapper>

@@ -40,8 +40,12 @@
       <root url="jar://$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/junit-4.9.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/commons-logging-1.1.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/slf4j-api-1.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib/mahout-core-0.7.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/WebDesignerOnline/web/WEB-INF/lib" recursive="false" type="SOURCES" />
   </library>
 </component>

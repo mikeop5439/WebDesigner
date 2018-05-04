@@ -6,6 +6,7 @@ public class User_prod {
     private int user_id;
     private int prod_id;
     private Date used_date;
+    private int value;
 
     public int getUser_id() {
         return user_id;
@@ -31,12 +32,21 @@ public class User_prod {
         this.used_date = used_date;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "User_prod{" +
                 "user_id=" + user_id +
                 ", prod_id=" + prod_id +
                 ", used_date=" + used_date +
+                ", value=" + value +
                 '}';
     }
 }

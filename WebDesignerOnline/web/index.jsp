@@ -28,7 +28,42 @@
 		 <!---- start-smoth-scrolling---->
 		 <meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-
+		<script>
+            window.onload=function(){
+                console.log("!!!!!!!!!!!!!");
+                if("<%=session.getAttribute("username")%>"!="null" ){
+                    $(".login").css("display","");
+                    $(".unlogin").css("display","none");
+                    $.ajax({
+                        type:"POST",
+                        url:"${pageContext.request.contextPath }/recommend/getRecommendByUserId.action?user_id="+"<%=session.getAttribute("user_id")%>",
+                        contentType:'application/json;charset=utf-8',
+                        success:function(data){
+                            $(".owl-wrapper").empty();
+                            $.each(data,function(index,content){
+                                var div=$("<div></div>").addClass("owl-item");
+                                var div1=$("<div></div>").addClass("item");
+                                var div2=$("<div></div>").addClass("portfolio-grid");
+                                var div3=$("<div></div>").addClass("portfolio-grid-pic");
+                                var img=$("<img />").attr("src","${pageContext.request.contextPath}"+content.prod_image_src).css("width","509px").css("height","509px");
+                                var a=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src);
+                                var div4=$("<div></div>").addClass("portfolio-grid-caption text-center");
+                                var h1=$("<h4></h4>").append(content.prod_name);
+                                var h2=$("<h5></h5>").append(content.prod_desc);
+                                var span=$("<span></span>")
+                                div1.append(div2.append(div3.append(img)).append(a.append(div4.append(h1).append(h2).append(span))));
+                                div.append(div1);
+                                $(".owl-wrapper").append(div);
+                            });
+                        }
+                    });
+                    if("<%=session.getAttribute("userflag")%>"!="0" ){
+                        $(".htlogin").css("display","");
+                        $(".unhtlogin").css("display","none");
+                    }
+                }
+            }
+		</script>
 	</head>
 	<body>
 		<!-- container -->
@@ -178,157 +213,108 @@
 				<!-- portfolio-grids -->
 				<div class="portfolio-grids text-left">
 					 <!-- requried-jsfiles-for owl -->
-							<link href="fe/css/owl.carousel.css" rel="stylesheet">
-							    <script src="fe/js/owl.carousel.js"></script>
-							        <script>
-							    $(document).ready(function() {
-							      $("#owl-demo").owlCarousel({
-							        items : 5,
-							        lazyLoad : false,
-							        autoPlay : true,
-							        navigation : false,
-							        navigationText :  false,
-							        pagination : false,
-							      });
-							    });
-							    </script>
+
 							 <!-- //requried-jsfiles-for owl -->
 							 <!-- start content_slider -->
 						       <div id="owl-demo" class="owl-carousel text-center">
-					                <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic1.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic2.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic3.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic5.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic4.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic1.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic1.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic2.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic3.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic5.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="portfolio-grid">
-											<div class="portfolio-grid-pic">
-												<img src="fe/images/port-pic4.jpg" title="name" />
-											</div>
-											<div class="portfolio-grid-caption text-center">
-												<h4>Branding</h4>
-												<h5>Metalbrand</h5>
-												<span> </span>
-											</div>
-										</div>
-					                </div>
+									   <div class="item">
+										   <div class="portfolio-grid">
+											   <div class="portfolio-grid-pic">
+												   <img src="/WebDesignerOnline\document\resource\classfiy\images\0.jpg" style="width: 509px; height: 509px;">
+											   </div>
+											   <a href="/WebDesignerOnlinenull">
+												   <div class="portfolio-grid-caption text-center">
+													   <h4>test</h4>
+													   <h5>test</h5>
+													   <span></span>
+												   </div>
+											   </a>
+										   </div>
+									   </div>
+									   <div class="item"><div class="portfolio-grid"><div class="portfolio-grid-pic"><img src="/WebDesignerOnline\document\resource\prod\images\10.jpg" style="width: 509px; height: 509px;"></div><a href="/WebDesignerOnline\document\resource\prod\src\10\"><div class="portfolio-grid-caption text-center"><h4>宠物</h4><h5>宠物销售页面</h5><span></span></div></a></div></div>
+									   <div class="item">
+										   <div class="portfolio-grid">
+											   <div class="portfolio-grid-pic">
+												   <img src="fe/images/port-pic1.jpg" title="name" />
+											   </div>
+											   <a href="fe/modal.jsp">
+												   <div class="portfolio-grid-caption text-center">
+													   <h4>Branding</h4>
+													   <h5>Metalbrand</h5>
+													   <span> </span>
+												   </div>
+											   </a>
+										   </div>
+									   </div>
+
+									   <div class="item">
+										   <div class="portfolio-grid">
+											   <div class="portfolio-grid-pic">
+												   <img src="fe/images/port-pic1.jpg" title="name" />
+											   </div>
+											   <a href="fe/modal.jsp">
+												   <div class="portfolio-grid-caption text-center">
+													   <h4>Branding</h4>
+													   <h5>Metalbrand</h5>
+													   <span> </span>
+												   </div></a>
+										   </div>
+									   </div>
+									   <div class="item">
+										   <div class="portfolio-grid">
+											   <div class="portfolio-grid-pic">
+												   <img src="fe/images/port-pic1.jpg" title="name" />
+											   </div>
+											   <a href="fe/modal.jsp">
+												   <div class="portfolio-grid-caption text-center">
+													   <h4>Branding</h4>
+													   <h5>Metalbrand</h5>
+													   <span> </span>
+												   </div></a>
+										   </div>
+									   </div>
+									   <div class="item">
+										   <div class="portfolio-grid">
+											   <div class="portfolio-grid-pic">
+												   <img src="fe/images/port-pic1.jpg" title="name" />
+											   </div>
+											   <a href="fe/modal.jsp">
+												   <div class="portfolio-grid-caption text-center">
+													   <h4>Branding</h4>
+													   <h5>Metalbrand</h5>
+													   <span> </span>
+												   </div></a>
+										   </div>
+									   </div>
+									   <div class="item">
+										   <div class="portfolio-grid">
+											   <div class="portfolio-grid-pic">
+												   <img src="fe/images/port-pic1.jpg" title="name" />
+											   </div>
+											   <a href="fe/modal.jsp">
+												   <div class="portfolio-grid-caption text-center">
+													   <h4>Branding</h4>
+													   <h5>Metalbrand</h5>
+													   <span> </span>
+												   </div></a>
+										   </div>
+									   </div>
 					            </div>
 				</div>
+				<link href="fe/css/owl.carousel.css" rel="stylesheet">
+				<script src="fe/js/owl.carousel.js"></script>
+				<script>
+                    $(document).ready(function() {
+                        $("#owl-demo").owlCarousel({
+                            items : 5,
+                            lazyLoad : false,
+                            autoPlay : true,
+                            navigation : false,
+                            navigationText :  false,
+                            pagination : false,
+                        });
+                    });
+				</script>
 				<!-- portfolio-grids -->
 				<a class="more" href="#">more on behance</a><br />
 				<a href="#about" class="scroll"><label class="downarrow1"> </label></a>
@@ -538,14 +524,6 @@
 						<p><a href="#totop" class="scroll">Back to top<span> </span></a></p>
 						<script type="text/javascript">
 									$(document).ready(function() {
-                                        if("<%=session.getAttribute("username")%>"!="null" ){
-                                            $(".login").css("display","");
-                                            $(".unlogin").css("display","none");
-                                            if("<%=session.getAttribute("userflag")%>"!="0" ){
-                                                $(".htlogin").css("display","");
-                                                $(".unhtlogin").css("display","none");
-                                            }
-                                        }
 										
 										$().UItoTop({ easingType: 'easeOutQuart' });
 										
