@@ -18,29 +18,29 @@ body a{
 	position:relative;
 }
 .menu{
-
-
+	
+	
 	position: absolute;
 	top: 40px;
 }
 .menu ul{
 	margin: 3.2em 0 0 3em;
 	padding: 0;
-
+	
 }
 .menu ul li{
 	display:inline-block;
-
+	
 }
 .menu ul li a{
-	color:white;
+	color:wheat;
 	font-weight:400;
 	text-transform:uppercase;
 	font-size:0.875em;
 	margin:0 5em;
-
-	text-decoration:none;
-
+	
+	text-decoration:none; 
+	
 }
 .menu ul li a:hover{
 	color:#c59a6d;
@@ -69,6 +69,7 @@ span.menu-icon{
 	padding:0;
 	font-family: 'Asap', sans-serif;
 }
+
 .header-info span{
 	height:2px;
 	width:30%;
@@ -76,9 +77,9 @@ span.menu-icon{
 	display:inline-block;
 }
 .header-info h1{
-	font-weight:700;
+	font-weight:300;
 	color:#FFF;
-	font-size:2.5em;
+	font-size:1.5em;
 	margin:1em 0 2em 0;
 	padding:0;
 }
@@ -174,14 +175,14 @@ a.play span:hover{
 	background: url(../images/service-icons.png) no-repeat 4px 0px;
 }
 .service-grid h4{
-	color:#8e9297;
+	color:white;
 	font-weight:700;
 	text-transform:uppercase;
 	font-size:1.2em;
 	margin: 1.3em 0 1.4em 0;
 }
 .service-grid p{
-	color: #8e9297;
+	color:white;
 	font-size: 1em;
 	width: 90%;
 	margin: 1em auto 0 auto;

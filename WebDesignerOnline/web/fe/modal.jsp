@@ -199,7 +199,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		 </div>	
      </div>
-       <div  style="float: none;  display: block;  margin-left: auto;  margin-right: auto; text-align: center;  " >
+       <div  style="float: none;  display: block;  margin-left: auto;  margin-right: auto; text-align: center;background-color: #f3f1f2;  " >
               <input type="hidden" id="nowpage" value="1">
               <input type="hidden" id="allpage" value="1">
             <ul id="pageUl" class="pagination">

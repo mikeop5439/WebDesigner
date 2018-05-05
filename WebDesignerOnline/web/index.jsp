@@ -8,15 +8,15 @@
 <html>
 	<head>
 		<title>Home</title>
-		<link href="${pageContext.request.contextPath}/fe/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<link href="  ${pageContext.request.contextPath}/fe/css/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="${pageContext.request.contextPath}/fe/js/jquery.min.js"></script>
+		<script src="  ${pageContext.request.contextPath}/fe/js/jquery.min.js"></script>
 		 <!-- Custom Theme files -->
-		<link href="${pageContext.request.contextPath}/fe/css/style.css" rel='stylesheet' type='text/css' />
+		<link href="  ${pageContext.request.contextPath}/fe/css/style.css" rel='stylesheet' type='text/css' />
    		 <!-- Custom Theme files -->
    		  <!---- start-smoth-scrolling---->
-		<script type="text/javascript" src="${pageContext.request.contextPath}/fe/js/move-top.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/fe/js/easing.js"></script>
+		<script type="text/javascript" src="  ${pageContext.request.contextPath}/fe/js/move-top.js"></script>
+		<script type="text/javascript" src="  ${pageContext.request.contextPath}/fe/js/easing.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -29,8 +29,7 @@
 		 <meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<script>
-            window.onload=function(){
-                console.log("!!!!!!!!!!!!!");
+           window.onload=function(){
                 if("<%=session.getAttribute("username")%>"!="null" ){
                     $(".login").css("display","");
                     $(".unlogin").css("display","none");
@@ -64,6 +63,7 @@
                 }
             }
 		</script>
+    <meta charset="utf-8">
 	</head>
 	<body>
 		<!-- container -->
@@ -79,10 +79,10 @@
 					<span class="menu-icon"> </span>
 					<ul>
 						<li><a href="#services" class="scroll">首页</a></li>
-						<li class="login" style="display: none"><a href="fe/gallery.jsp" >模板</a></li>
+						<li class="login" style="display: none"><a href=" ${pageContext.request.contextPath}/fe/gallery.jsp" >模板</a></li>
 						<li><a href="#projects" class="scroll">关于</a></li>
 						<li class="unhtlogin"><a href="#contact" class="scroll">联系我们</a></li>
-						<li class="unlogin"><a href="fe/login.jsp" >登录</a></li>
+						<li class="unlogin"><a href="   ${pageContext.request.contextPath}/fe/login.jsp" >登录</a></li>
 						<li class="htlogin" style="display: none"><a href="ht/index.jsp" >系统管理平台</a></li>
 						<li class="login" style="display: none"><a href="${pageContext.request.contextPath }/users/quitUser.action" >退出登录</a></li>
 						<div class="clearfix"> </div>
@@ -111,26 +111,29 @@
 			</div>
 			<!-- /header -->
 			</div>
+			
+			
+			
 			<!-- intro -->
 			<div id="intro" class="intro text-center">
 				<div class="container">
 					<!-- head-section -->
 					<div class="head-section text-center">
-						<h2>Meet us</h2>
+						<h2>基于bootstrap模板，快速搭建一个响应式网站</h2>
 						<span> </span>
 					</div>
 					<!-- /head-section -->
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-					<a href="#services"  class="scroll"><label class="downarrow1"> </label></a>
+					<p>我们的网站，将传统的编码工作转化为直观的拖拽操作和文字录入。在这里，您仅需花上10分钟便可以完成一个H5响应式网站，您会发现完全不需要编写一行代码，这就是我们网站的神奇之处。</p>
+					
 				</div>
 			</div>
 			<!-- intro -->
 			<!-- video -->
 			<!---- video ---->
 				<!---pop-up-box---->
-					<script type="text/javascript" src="${pageContext.request.contextPath}/fe/js/modernizr.custom.min.js"></script>
-					<link href="${pageContext.request.contextPath}/fe/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
-					<script src="${pageContext.request.contextPath}/fe/js/jquery.magnific-popup.js" type="text/javascript"></script>
+					<script type="text/javascript" src=" ${pageContext.request.contextPath}/fe/js/modernizr.custom.min.js"></script>
+					<link href="  ${pageContext.request.contextPath}/fe/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+					<script src="  ${pageContext.request.contextPath}/fe/js/jquery.magnific-popup.js" type="text/javascript"></script>
 					<!---//pop-up-box---->
 				<div id="small-dialog" class="mfp-hide">
 					<iframe > </iframe>
@@ -151,64 +154,76 @@
 																						
 						});
 				</script>								  
-				</div>
+				
+				
 			<!----//fea-video---->
 			<div id="price" class="video">
 				<a class="play popup-with-zoom-anim" href="#small-dialog"><span> </span></a>
 			</div>
+			
 			<!-- video -->
 			<!-- services -->
 			<div id="services" class="services text-center">
+			
 				<div class="container">
+				
 				<!-- head-section -->
 					<div class="head-section text-center">
-						<h2>Service</h2>
+						<h2>更快，更简单</h2>
 						<span> </span>
 					</div>
 					<!-- /head-section -->
-				<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-				<!-- service-grids -->
-				<div class="service-grids">
-					<div class="col-md-4 service-grid text-center">
-						<span class="s-icon"> </span>
-						<h4>BRANDING</h4>
-						<p>Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
-					</div>
-					<div class="col-md-4 service-grid text-center">
-						<span class="s-icon1"> </span>
-						<h4>WEB DEVELOPMENT</h4>
-						<p>Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
-					</div>
-					<div class="col-md-4 service-grid text-center">
-						<span class="s-icon2"> </span>
-						<h4>APP DESIGN</h4>
-						<p>Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<!-- service-grids -->
-				<a href="#projects" class="scroll"><label class="downarrow1"> </label></a>
+				<p>让您事半功N倍的建站工具
+一次编辑，在所有设备下使用</p>
+				
+			
 				</div>
 			</div>
 			<!-- services -->
 			<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
-			<!-- shope -->
-			<div class="shope text-center">
+			
+			
+			<!-- clients -->
+			<div class="clients">
 				<div class="container">
-					<a href="#">Check our shope</a>
+					<!-- head-section -->
+						<div class="head-section text-center">
+							<h2>真正的响应式自助建站，自适应所有设备</h2>
+							
+						</div>
+					<!-- /head-section -->
+					<!-- service-grids -->
+				<div class="service-grids">
+					<div class="col-md-4 service-grid text-center">
+						<span class="s-icon"> </span>
+						<h4>平板</h4>
+						
+					</div>
+					<div class="col-md-4 service-grid text-center">
+						<span class="s-icon1"> </span>
+						<h4>电脑</h4>
+					
+					</div>
+					<div class="col-md-4 service-grid text-center">
+						<span class="s-icon2"> </span>
+						<h4>手机</h4>
+					
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<!-- service-grids -->
 				</div>
 			</div>
-			<!-- /shope -->
-			<!-- portfolio -->
+			<!-- clients -->
 			<div id="projects" class="portfolio text-center">
 				<div class="container">
 				<!-- head-section -->
 					<div class="head-section text-center">
-						<h2>Our latest projects</h2>
+						<h2>免费海量模板随您挑选</h2>
 						<span> </span>
 					</div>
 					<!-- /head-section -->
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+					<p>您可以从众多出色的H5模板中挑选出您最喜欢的</p>
 				</div>
 				<!-- portfolio-grids -->
 				<div class="portfolio-grids text-left">
@@ -220,24 +235,9 @@
 									   <div class="item">
 										   <div class="portfolio-grid">
 											   <div class="portfolio-grid-pic">
-												   <img src="/WebDesignerOnline\document\resource\classfiy\images\0.jpg" style="width: 509px; height: 509px;">
+												   <img src="${pageContext.request.contextPath}/fe/images/port-pic1.jpg" title="name" />
 											   </div>
-											   <a href="/WebDesignerOnlinenull">
-												   <div class="portfolio-grid-caption text-center">
-													   <h4>test</h4>
-													   <h5>test</h5>
-													   <span></span>
-												   </div>
-											   </a>
-										   </div>
-									   </div>
-									   <div class="item"><div class="portfolio-grid"><div class="portfolio-grid-pic"><img src="/WebDesignerOnline\document\resource\prod\images\10.jpg" style="width: 509px; height: 509px;"></div><a href="/WebDesignerOnline\document\resource\prod\src\10\"><div class="portfolio-grid-caption text-center"><h4>宠物</h4><h5>宠物销售页面</h5><span></span></div></a></div></div>
-									   <div class="item">
-										   <div class="portfolio-grid">
-											   <div class="portfolio-grid-pic">
-												   <img src="fe/images/port-pic1.jpg" title="name" />
-											   </div>
-											   <a href="fe/modal.jsp">
+											   <a href=" ${pageContext.request.contextPath}/fe/modal.jsp">
 												   <div class="portfolio-grid-caption text-center">
 													   <h4>Branding</h4>
 													   <h5>Metalbrand</h5>
@@ -250,9 +250,9 @@
 									   <div class="item">
 										   <div class="portfolio-grid">
 											   <div class="portfolio-grid-pic">
-												   <img src="fe/images/port-pic1.jpg" title="name" />
+												   <img src=" ${pageContext.request.contextPath}/fe/images/port-pic1.jpg" title="name" />
 											   </div>
-											   <a href="fe/modal.jsp">
+											   <a href="   ${pageContext.request.contextPath}/fe/modal.jsp">
 												   <div class="portfolio-grid-caption text-center">
 													   <h4>Branding</h4>
 													   <h5>Metalbrand</h5>
@@ -263,9 +263,9 @@
 									   <div class="item">
 										   <div class="portfolio-grid">
 											   <div class="portfolio-grid-pic">
-												   <img src="fe/images/port-pic1.jpg" title="name" />
+												   <img src="  ${pageContext.request.contextPath}/fe/images/port-pic1.jpg" title="name" />
 											   </div>
-											   <a href="fe/modal.jsp">
+											   <a href="  ${pageContext.request.contextPath}/fe/modal.jsp">
 												   <div class="portfolio-grid-caption text-center">
 													   <h4>Branding</h4>
 													   <h5>Metalbrand</h5>
@@ -276,9 +276,9 @@
 									   <div class="item">
 										   <div class="portfolio-grid">
 											   <div class="portfolio-grid-pic">
-												   <img src="fe/images/port-pic1.jpg" title="name" />
+												   <img src="   ${pageContext.request.contextPath}/fe/images/port-pic1.jpg" title="name" />
 											   </div>
-											   <a href="fe/modal.jsp">
+											   <a href="  ${pageContext.request.contextPath}/fe/ modal.jsp">
 												   <div class="portfolio-grid-caption text-center">
 													   <h4>Branding</h4>
 													   <h5>Metalbrand</h5>
@@ -289,9 +289,9 @@
 									   <div class="item">
 										   <div class="portfolio-grid">
 											   <div class="portfolio-grid-pic">
-												   <img src="fe/images/port-pic1.jpg" title="name" />
+												   <img src="   images/port-pic1.jpg" title="name" />
 											   </div>
-											   <a href="fe/modal.jsp">
+											   <a href="   modal.jsp">
 												   <div class="portfolio-grid-caption text-center">
 													   <h4>Branding</h4>
 													   <h5>Metalbrand</h5>
@@ -301,8 +301,8 @@
 									   </div>
 					            </div>
 				</div>
-				<link href="fe/css/owl.carousel.css" rel="stylesheet">
-				<script src="fe/js/owl.carousel.js"></script>
+				<link href="   ${pageContext.request.contextPath}/fe/css/owl.carousel.css" rel="stylesheet">
+				<script src="   ${pageContext.request.contextPath}/fe/js/owl.carousel.js"></script>
 				<script>
                     $(document).ready(function() {
                         $("#owl-demo").owlCarousel({
@@ -316,38 +316,14 @@
                     });
 				</script>
 				<!-- portfolio-grids -->
-				<a class="more" href="#">more on behance</a><br />
-				<a href="#about" class="scroll"><label class="downarrow1"> </label></a>
+				
 			</div>
-			<!-- portfolio -->
-			<!-- clients -->
-			<div class="clients">
-				<div class="container">
-					<!-- head-section -->
-						<div class="head-section text-center">
-							<h2>Our partners</h2>
-							<span> </span>
-						</div>
-					<!-- /head-section -->
-					<!-- client-list -->
-					<div class="client-list text-center">
-						<ul>
-							<li><a href="#"><img src="${pageContext.request.contextPath}/fe/images/c-logo.png" title="adidas" /></a></li>
-							<li><a href="#"><img src="${pageContext.request.contextPath}/fe/images/c-logo1.png" title="google" /></a></li>
-							<li><a href="#"><img src="${pageContext.request.contextPath}/fe/images/c-logo2.png" title="samsung" /></a></li>
-							<li><a href="#"><img src="${pageContext.request.contextPath}/fe/images/c-logo3.png" title="microsoft" /></a></li>
-						</ul>
-					</div>
-					<!-- /client-list -->
-				</div>
-			</div>
-			<!-- clients -->
 			<!-- about-us -->
 			<div id="about" class="about-us text-center">
 				<div class="container">
 				<!-- head-section -->
 					<div class="head-section text-center">
-						<h2>About us</h2>
+						<h2>我们拥有强大的团队</h2>
 						<span> </span>
 					</div>
 					<!-- /head-section -->
@@ -356,7 +332,7 @@
 					<div class="about-grids">
 						<div class="col-md-3 about-grid text-center">
 							<div class="about-grid-info">
-								<img src="fe/images/about-pic1.png" title="name" />
+								<img src="${pageContext.request.contextPath}/fe/images/about-pic1.png" title="name" />
 								<h4>Mike</h4>
 								<span>CEO / Founder</span>
 								<label> </label>
@@ -368,7 +344,7 @@
 						</div>
 						<div class="col-md-3 about-grid text-center">
 							<div class="about-grid-info">
-								<img src="fe/images/about-pic2.png" title="name" />
+								<img src="${pageContext.request.contextPath}/fe/images/about-pic2.png" title="name" />
 								<h4>Taylor</h4>
 								<span>Graphic Designer</span>
 								<label> </label>
@@ -380,7 +356,7 @@
 						</div>
 						<div class="col-md-3 about-grid text-center">
 							<div class="about-grid-info">
-								<img src="fe/images/about-pic3.png" title="name" />
+								<img src="${pageContext.request.contextPath}/fe/images/about-pic3.png" title="name" />
 								<h4>James</h4>
 								<span>Copywriter</span>
 								<label> </label>
@@ -392,7 +368,7 @@
 						</div>
 						<div class="col-md-3 about-grid text-center">
 							<div class="about-grid-info">
-								<img src="fe/images/about-pic1.png" title="name" />
+								<img src="${pageContext.request.contextPath}/fe/images/about-pic1.png" title="name" />
 								<h4>Mike</h4>
 								<span>CEO / Founder</span>
 								<label> </label>
@@ -410,102 +386,52 @@
 				
 			</div>
 			<!-- about-us -->
-			<!-- latest-twittes -->
-			<div class="latest-twittes">
-				<div class="container">
-					<!-- head-section -->
-					<div class="head-section text-center">
-						<h2>Latest tweets</h2>
-						<span> </span>
-					</div>
-					<!-- /head-section -->
-					<!-- twittes -->
-					<div class="twittes">
-						 <script>
-							    $(document).ready(function() {
-							      $("#owl-demo1").owlCarousel({
-							        items : 1,
-							        lazyLoad : false,
-							        autoPlay : true,
-							        navigation : false,
-							        navigationText :  false,
-							        pagination : true,
-							      });
-							    });
-							    </script>
-							 <!-- //requried-jsfiles-for owl -->
-							 <!-- start content_slider -->
-						       <div id="owl-demo1" class="owl-carousel owl-carousel1 text-center">
-					                <div class="item">
-					                	<div class="twitt text-center">
-											<p>Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
-											<a href="#">Craig</a>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="twitt text-center">
-											<p>Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
-											<a href="#">Craig</a>
-										</div>
-					                </div>
-					                 <div class="item">
-					                	<div class="twitt text-center">
-											<p>Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
-											<a href="#">Craig</a>
-										</div>
-					                </div>
-					            </div>
-					</div>
-					<!-- twittes -->
-				</div>
-			</div>
-			<!-- latest-twittes -->
+		
 			<!-- contact -->
 			<div id="contact" class="contact">
 				<div class="container">
 					<!-- head-section -->
 					<div class="head-section text-center">
-						<h2>Contact us</h2>
+						<h2>联系我们</h2>
 						<span> </span>
 					</div>
 					<!-- /head-section -->
 					<!-- contact-grids -->
 					<div class="contact-grids">
 						<div class="col-md-4 contact-left">
-							<h4>Address</h4>
+							<h4>地址</h4>
 							<ul class="address">
-								<li>908 New Hampshire Ave NW </li>
-								<li>Washington, DC 20037 </li>
+								<li>贵州大学北校区</li>
+								<li>189840001236</li>
 								<li>(202) 463-5141 </li>
-								<li>Doris Cannon</li>
+								<li>黑马大楼</li>
 							</ul>
 							<ul class="social-icons">
 								<li><a href="#"><span class="facebook"> </span></a></li>
 								<li><a href="#"><span class="twitter"> </span></a></li>
-								<li><a href="#"><span class="vimeo"> </span></a></li>
-								<li><a href="#"><span class="behance"> </span></a></li>
+								
 							</ul>
 						</div>
 						<div class="col-md-8 contact-right">
 							<form>
 								<div class="text-boxs">
 									<div class="text-box">
-										<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
+										<input type="text" value="名字" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
 									</div>
 									<div class="text-box">
-										<input type="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+										<input type="text" value="邮箱" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
 									</div>
 									<div class="text-box">
-										<input type="text" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}">
+										<input type="text" value="联系电话" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}">
 									</div>
 									<div class="text-box">
-										<input type="text" value="Subject" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}">
+										<input type="text" value="地址" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}">
 									</div>
 								</div>
 								<div class="subject-box">
-									<textarea>Message</textarea>
+									<textarea>留言</textarea>
 								</div>
-								<input type="submit" value="Send" />
+								<input type="submit" value="发送" />
 							</form>
 						</div>
 						<div class="clearfix"> </div>
@@ -518,10 +444,10 @@
 			<div class="footer">
 				<div class="container"> 
 					<div class="footer-left">
-						<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+						<p>Copyright &copy; 2016.Company name All rights </p>
 					</div>
 					<div class="footer-right">
-						<p><a href="#totop" class="scroll">Back to top<span> </span></a></p>
+						<p><a href="#totop" class="scroll">回到顶部<span> </span></a></p>
 						<script type="text/javascript">
 									$(document).ready(function() {
 										

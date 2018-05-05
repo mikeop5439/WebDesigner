@@ -82,11 +82,11 @@ public class ModalController {
 
                     String realName="";
 
-                    realName = realName+prod.getSpec_id()+".jpg";
+                    realName = realName+prod.getProd_id()+".jpg";
 
                     String realFilePath = path+File.separator+realName;
 
-                    String saveFilePath = File.separator+"document"+File.separator+"resource"+File.separator+"classfiy"+File.separator+"images"+File.separator+realName;
+                    String saveFilePath = File.separator+"document"+File.separator+"resource"+File.separator+"prod"+File.separator+"images"+File.separator+realName;
 
                     File file = new File(realFilePath);
                     classphoto.transferTo(file);

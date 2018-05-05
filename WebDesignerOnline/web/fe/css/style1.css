@@ -5,7 +5,9 @@ p {margin: 0;}
 html, body{
    font-family: 'Montserrat', sans-serif;
    font-size: 100%;
-   background:#fff; 
+	background-image: url('../images/header-bg.jpg');
+
+
 }
 body a{
 	transition:0.5s all;
