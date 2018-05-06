@@ -7,6 +7,7 @@ import com.webdesign.service.analysis.service.AnalysisService;
 import com.webdesign.service.modal.service.ModalService;
 import com.webdesign.service.recommend.service.RecommendService;
 import com.webdesign.service.users.service.UserLoginAndRegisteredService;
+import com.webdesign.tools.Ioliu;
 import com.webdesign.tools.UserBased;
 import com.webdesign.tools.ZipUtil;
 import org.apache.mahout.cf.taste.common.TasteException;
@@ -62,8 +63,11 @@ public class AddTest {
         }
     }
     @Test
-    public void test3() throws IOException, TasteException {
-        System.out.println("!!!!!!!!!!!!!"+recommendService.queryProd4());
+    public void test3() throws Exception {
+        Ioliu ioliu=new Ioliu();
+        String src="D:\\IDEAWorkSpace\\git\\WebDesigner\\out\\artifacts\\WebDesignerOnline_war_exploded\\document\\resource\\prod\\src\\12";
+        String dsc="D:\\IDEAWorkSpace\\git\\WebDesigner\\out\\artifacts\\WebDesignerOnline_war_exploded\\document\\resource\\prod\\use\\1\\12";
+        ioliu.copy(src,dsc);
     }
     @Test
     public void test() throws IOException, TasteException {

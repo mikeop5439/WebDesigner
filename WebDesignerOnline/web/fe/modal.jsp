@@ -85,7 +85,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         if (index<=3) {
                             var div1=$("<div></div>").addClass("col-md-3 grid_box");
                             var div2=$("<div></div>").addClass("grid_box2");
-                            var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                            var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}/maker/getMaker.action?user_id="+"<%=session.getAttribute("user_id")%>"+"&prod_id="+content.prod_id).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
                             var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).append(content.prod_name).attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
                             var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.prod_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
                             var span=$("<span></span>").addClass("zoom-icon");
@@ -96,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         }else {
                             var div1=$("<div></div>").addClass("col-md-3 grid_box");
                             var div2=$("<div></div>").addClass("grid_box2");
-                            var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                            var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}/maker/getMaker.action?user_id="+"<%=session.getAttribute("user_id")%>"+"&prod_id="+content.prod_id).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
                             var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).append(content.prod_name).attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
                             var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.prod_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
                             var span=$("<span></span>").addClass("zoom-icon");
@@ -113,7 +113,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $.each(data.prods,function(index,content){
                         var div1=$("<div></div>").addClass("col-md-3 grid_box");
                         var div2=$("<div></div>").addClass("grid_box2");
-                        var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
+                        var a1=$("<a></a>").attr("href","${pageContext.request.contextPath}/maker/getMaker.action?user_id="+"<%=session.getAttribute("user_id")%>"+"&prod_id="+content.prod_id).addClass("swipebox").attr("title","Image Title").attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
                         var a2=$("<a></a>").attr("href","${pageContext.request.contextPath}"+content.service_src).append(content.prod_name).attr("rel","external").attr("onclick","insertUserProd("+content.prod_id+")");
                         var img=$("<img></img>").attr("src","${pageContext.request.contextPath}"+content.prod_image_src).addClass("img-responsive").attr("alt","").css("width","500px").css("height","374px");
                         var span=$("<span></span>").addClass("zoom-icon");
