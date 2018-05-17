@@ -68,18 +68,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     function queryModalByClassfiy(nowpage) {
         var spec_id=GetQueryString("spec_id");
         var params = '{"spec_id":"'+spec_id+'","now_page":"'+nowpage+'"}';
-        $.ajax({
-            type:"POST",
-            url:"${pageContext.request.contextPath }/seach/queryModalByClassfiy.action",
-            data:params,
-            contentType:'application/json;charset=utf-8',
-            success:function(data){
-                setpage(data.allpage,nowpage);
-                $("#div_classfiy").empty();
+                   $.ajax({
+                       type:"POST",
+                       url:"${pageContext.request.contextPath }/seach/queryModalByClassfiy.action",
+                       data:params,
+                       contentType:'application/json;charset=utf-8',
+                       success:function(data){
+                           setpage(data.allpage,nowpage);
+                           $("#div_classfiy").empty();
 
-               if((data.prods).length>4){
-                    var diva=$("<div></div>").addClass("entertain_box wow fadeInLeft").attr("data-wow-delay","0.4s");
-                    var divb=$("<div></div>").addClass("entertain_box wow fadeInLeft").attr("data-wow-delay","0.4s");
+                           if((data.prods).length>4){
+                               var diva=$("<div></div>").addClass("entertain_box wow fadeInLeft").attr("data-wow-delay","0.4s");
+                               var divb=$("<div></div>").addClass("entertain_box wow fadeInLeft").attr("data-wow-delay","0.4s");
 
                     $.each(data.prods,function(index,content){
                         if (index<=3) {

@@ -80,6 +80,7 @@
 					<ul>
 						<li><a href="#services" class="scroll">首页</a></li>
 						<li class="login" style="display: none"><a href=" ${pageContext.request.contextPath}/fe/gallery.jsp" >模板</a></li>
+						<li class="login" style="display: none"><a href=" ${pageContext.request.contextPath}/maker/toHistory.action" >制作历史</a></li>
 						<li><a href="#projects" class="scroll">关于</a></li>
 						<li class="unhtlogin"><a href="#contact" class="scroll">联系我们</a></li>
 						<li class="unlogin"><a href="   ${pageContext.request.contextPath}/fe/login.jsp" >登录</a></li>
@@ -104,7 +105,7 @@
 				<div class="header-info text-center">
 					<h2>做一个属于自己的网站   让世界更好的了解您</h2>
 					<span> </span>
-					<h1>米拉 引领在线制作网页潮流</h1>
+					<h1>MiLaDesigner 引领在线制作网页潮流</h1>
 					<a href="#intro"  class="scroll"><label class="downarrow"> </label></a>
 				</div>
 				<!-- /header-info -->

@@ -58,7 +58,6 @@ public class ModalController {
 
         keywordsAndNowPage.setStartindex(startindex);
         ProdAndAllPage prodAndAllPage=new ProdAndAllPage();
-        System.out.println("!!!!!!!!!!!!!!!"+modalService.seachModalLimit(keywordsAndNowPage));
         prodAndAllPage.setProds(modalService.seachModalLimit(keywordsAndNowPage));
         prodAndAllPage.setAllpage(allpage);
         return prodAndAllPage;

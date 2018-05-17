@@ -5,5 +5,20 @@
 <!-- 这个文件中编写sql语句 -->
 <!-- xml 可以作为配置文件。 -->
 <mapper namespace="com.webdesign.mapper.maker.MakerMapper">
-
+    <!--查询是否已有历史记录-->
+    <select id="selectHis" parameterType="htmlAndUserIdAndProdId" resultType="int">
+        select count(*) from his_mark hm where user_id=#{user_id} and prod_id=#{prod_id}
+    </select>
+    <!--删除已有历史记录-->
+    <delete id="deleteHis" parameterType="htmlAndUserIdAndProdId">
+        delete from his_mark where user_id=#{user_id} and prod_id=#{prod_id}
+    </delete>
+    <!--插入历史记录-->
+    <insert id="insertHis" parameterType="htmlSrcAndUserIdAndProdId">
+        insert into his_mark(user_id,prod_id,src,date,his_name,his_desc) values (#{user_id},#{prod_id},#{src},#{date},#{his_name},#{his_desc})
+    </insert>
+    <!--查询用户的历史记录-->
+    <select id="selectUserHis" parameterType="htmlAndUserIdAndProdId" resultType="his_mark">
+        select * from his_mark hm where user_id=#{user_id}
+    </select>
 </mapper>
